@@ -1,5 +1,6 @@
 import 'package:dinamik_otomasyon/View/screens/home_page.dart';
 import 'package:flutter/material.dart';
+import 'View/common/charts_ornek.dart';
 import 'View/screens/settings.dart';
 
 void main() {

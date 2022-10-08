@@ -29,6 +29,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Drawer(
+
       child: Column(
         children: [
           Container(
@@ -71,17 +72,15 @@ Widget _buildList(Menu list) {
           onTap: list.name == "Ayarlar"
               ? () => Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Settings()))
-              : list.name == "Çıkış" ? () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Login(
-
-                          ))):  () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ScheduleTab(
-                    cardName: list.name,
-                  ))),
+              : list.name == "Çıkış"
+                  ? () => Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Login()))
+                  : () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ScheduleTab(
+                                cardName: list.name,
+                              ))),
           leading: Icon(
             Icons.next_plan,
             color: Color(MyColors.bg01),
@@ -90,7 +89,7 @@ Widget _buildList(Menu list) {
             list.name!,
             style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
             ),
           ));
     });
@@ -110,7 +109,7 @@ Widget _buildList(Menu list) {
       list.name!,
       style: TextStyle(
           fontSize: 16,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
           color: Color(MyColors.bg01)),
     ),
     children: list.subMenu!.map(_buildList).toList(),

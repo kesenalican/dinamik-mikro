@@ -18,9 +18,9 @@ List<Map> schedules = [
   {
     'img': 'assets/doctor01.jpeg',
     'doctorName': 'Algida Dondurma',
-    'doctorTitle': 'Dental Specialist',
-    'reservedDate': 'Monday, Aug 29',
-    'reservedTime': '11:00 - 12:00',
+    'doctorTitle': 'Dondurma Grubu',
+    'reservedDate': '08.10.2022',
+    'reservedTime': '130',
     'status': FilterStatus.Upcoming
   },
   {
