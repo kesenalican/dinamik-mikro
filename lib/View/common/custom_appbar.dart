@@ -35,7 +35,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         IconButton(
           icon: Icon(Icons.settings),
           onPressed: (){
-            
+
           },
           iconSize: 40,
           color: Color(MyColors.bg01),

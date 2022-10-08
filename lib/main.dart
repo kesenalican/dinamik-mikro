@@ -1,6 +1,6 @@
-import 'package:dinamik_otomasyon/View/screens/remote_api.dart';
+import 'package:dinamik_otomasyon/View/screens/home_page.dart';
 import 'package:flutter/material.dart';
-import 'View/screens/login.dart';
+import 'View/screens/settings.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Dinamik Otomasyon',
-      home: Login(),
+      home: HomePage(),
     );
   }
 }

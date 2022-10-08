@@ -1,40 +1,19 @@
-import 'package:dinamik_otomasyon/View/screens/doctor_detail.dart';
 import 'package:flutter/material.dart';
 import '../../Model/module_name.dart';
-import '../common/custom_appbar.dart';
+import '../common/common_appbar.dart';
+import '../common/common_drawer.dart';
 import '../common/module_card_button.dart';
 import '../common/search_input.dart';
 import '../styles/colors.dart';
 import 'module_card.dart';
 
 
-List<Map> doctors = [
-  {
-    'img': 'assets/doctor02.png',
-    'doctorName': 'Dr. Gardner Pearson',
-    'doctorTitle': 'Heart Specialist'
-  },
-  {
-    'img': 'assets/doctor03.jpeg',
-    'doctorName': 'Dr. Rosa Williamson',
-    'doctorTitle': 'Skin Specialist'
-  },
-  {
-    'img': 'assets/doctor02.png',
-    'doctorName': 'Dr. Gardner Pearson',
-    'doctorTitle': 'Heart Specialist'
-  },
-  {
-    'img': 'assets/doctor03.jpeg',
-    'doctorName': 'Dr. Rosa Williamson',
-    'doctorTitle': 'Skin Specialist'
-  }
-];
-
 class HomePage extends StatefulWidget {
   String? sirketAdi;
+
   HomePage({
-    Key? key, this.sirketAdi,
+    Key? key,
+    this.sirketAdi,
   }) : super(key: key);
 
   @override
@@ -42,140 +21,169 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-               CustomAppBar(kullanciAdi: widget.sirketAdi!),
-              const SizedBox(
-                height: 10,
-              ),
-              const SearchInput(),
-              const SizedBox(
-                height: 20,
-              ),
-              const CategoryIcons(),
-              const CategoryIcons(),
-              const CategoryIcons(),
-              const CategoryIcons(),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Kartlar',
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar:CommonAppbar(whichPage: "Anasayfa"),
+      drawer: DrawerMenu(),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            //CustomAppBar(kullanciAdi: widget.sirketAdi!),
+            const SizedBox(
+              height: 10,
+            ),
+            const SearchInput(),
+            const SizedBox(
+              height: 20,
+            ),
+            const CategoryIcons(),
+            const CategoryIcons(),
+            const CategoryIcons(),
+            const CategoryIcons(),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Kartlar',
+                  style: TextStyle(
+                    color: Color(MyColors.header01),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                TextButton(
+                  child: Text(
+                    'Hepsini Gör',
                     style: TextStyle(
-                      color: Color(MyColors.header01),
+                      color: Color(MyColors.yellow01),
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
                     ),
                   ),
-                  TextButton(
-                    child: Text(
-                      'Hepsini Gör',
-                      style: TextStyle(
-                        color: Color(MyColors.yellow01),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[0],)));
-                },
-                cardName: Modules[0],
-                iconData:const Icon(Icons.attach_money_rounded),
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[1],)));
-                },
-                cardName: Modules[1],
-                iconData:const Icon(Icons.account_tree_sharp),
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[2],)));
-                },
-                cardName: Modules[2],
-                iconData:const Icon(Icons.info_outline_rounded),
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[3],)));
-                },
-                cardName: Modules[3],
-                iconData:const Icon(Icons.warehouse),
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[0],)));
-                },
-                cardName: Modules[0],
-                iconData:const Icon(Icons.attach_money_rounded),
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[1],)));
-                },
-                cardName: Modules[1],
-                iconData:const Icon(Icons.account_tree_sharp),
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[2],)));
-                },
-                cardName: Modules[2],
-                iconData:const Icon(Icons.info_outline_rounded),
-              ),
-              ModuleCardButton(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleTab(cardName:Modules[3],)));
-                },
-                cardName: Modules[3],
-                iconData:const Icon(Icons.warehouse),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Top Doctor',
-                style: TextStyle(
-                  color: Color(MyColors.header01),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              for (var doctor in doctors)
-                TopDoctorCard(
-                  img: doctor['img'],
-                  doctorName: doctor['doctorName'],
-                  doctorTitle: doctor['doctorTitle'],
+                  onPressed: () {},
                 )
-            ],
-          ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[0],
+                            )));
+              },
+              cardName: Modules[0],
+              iconData: const Icon(Icons.attach_money_rounded),
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[1],
+                            )));
+              },
+              cardName: Modules[1],
+              iconData: const Icon(Icons.account_tree_sharp),
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[2],
+                            )));
+              },
+              cardName: Modules[2],
+              iconData: const Icon(Icons.info_outline_rounded),
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[3],
+                            )));
+              },
+              cardName: Modules[3],
+              iconData: const Icon(Icons.warehouse),
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[0],
+                            )));
+              },
+              cardName: Modules[0],
+              iconData: const Icon(Icons.attach_money_rounded),
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[1],
+                            )));
+              },
+              cardName: Modules[1],
+              iconData: const Icon(Icons.account_tree_sharp),
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[2],
+                            )));
+              },
+              cardName: Modules[2],
+              iconData: const Icon(Icons.info_outline_rounded),
+            ),
+            ModuleCardButton(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: Modules[3],
+                            )));
+              },
+              cardName: Modules[3],
+              iconData: const Icon(Icons.warehouse),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+
+          ],
         ),
       ),
     );
   }
+
+
 }
 
 class TopDoctorCard extends StatelessWidget {
@@ -385,5 +393,3 @@ class CategoryIcon extends StatelessWidget {
     );
   }
 }
-
-
