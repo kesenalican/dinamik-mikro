@@ -35,6 +35,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
           Container(
             margin: EdgeInsets.only(
               left: 10,
+              right: 10,
+              top: 10,
             ),
             height: h * 0.15,
             child: UserAccountsDrawerHeader(

@@ -41,9 +41,9 @@ class _ModuleCardButtonState extends State<ModuleCardButton> {
                       children: [
                         CircleAvatar(
                           backgroundColor: Colors.transparent,
-                          child:widget.iconData,
+                          child: widget.iconData,
                         ),
-                       const SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
@@ -51,7 +51,8 @@ class _ModuleCardButtonState extends State<ModuleCardButton> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(widget.cardName!,
-                                style: const TextStyle(color: Colors.white,fontSize: 30)),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 30)),
                             const SizedBox(
                               height: 2,
                             ),
@@ -59,7 +60,6 @@ class _ModuleCardButtonState extends State<ModuleCardButton> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
@@ -67,7 +67,7 @@ class _ModuleCardButtonState extends State<ModuleCardButton> {
           ),
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           width: double.infinity,
           height: 10,
           decoration: BoxDecoration(

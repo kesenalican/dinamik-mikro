@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../Model/module_name.dart';
+import 'stokIslemleri/stok_listele.dart';
 import '../common/common_appbar.dart';
 import '../common/common_drawer.dart';
 import '../common/module_card_button.dart';
 import '../common/search_input.dart';
 import '../styles/colors.dart';
 import 'module_card.dart';
-
 
 class HomePage extends StatefulWidget {
   String? sirketAdi;
@@ -21,13 +21,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar:CommonAppbar(whichPage: "Anasayfa"),
+      appBar: CommonAppbar(whichPage: "Anasayfa"),
       drawer: DrawerMenu(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -79,12 +78,8 @@ class _HomePageState extends State<HomePage> {
             ),
             ModuleCardButton(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ScheduleTab(
-                              cardName: Modules[0],
-                            )));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => StokListele()));
               },
               cardName: Modules[0],
               iconData: const Icon(Icons.attach_money_rounded),
@@ -176,14 +171,11 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 20,
             ),
-
           ],
         ),
       ),
     );
   }
-
-
 }
 
 class TopDoctorCard extends StatelessWidget {

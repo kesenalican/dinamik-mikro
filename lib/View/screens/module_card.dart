@@ -6,7 +6,8 @@ import '../styles/styles.dart';
 
 class ScheduleTab extends StatefulWidget {
   String? cardName;
-  ScheduleTab({Key? key,required this.cardName}) : super(key: key);
+
+  ScheduleTab({Key? key, required this.cardName}) : super(key: key);
 
   @override
   State<ScheduleTab> createState() => _ScheduleTabState();
@@ -92,19 +93,23 @@ class _ScheduleTabState extends State<ScheduleTab> {
                   },
                 ),
                 const SizedBox(
-                  width: 60 ,
+                  width: 60,
                 ),
                 Text(
-                  widget.cardName == Modules[0]  ?  Modules[0]
-                      :  widget.cardName == Modules[1] ? Modules[1]
-                        : widget.cardName == Modules[2] ? Modules[2] : "",
+                  widget.cardName == Modules[0]
+                      ? Modules[0]
+                      : widget.cardName == Modules[1]
+                          ? Modules[1]
+                          : widget.cardName == Modules[2]
+                              ? Modules[2]
+                              : widget.cardName == Modules[3]
+                                  ? Modules[3]
+                                  : "",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(MyColors.bg01),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20
-                  ),
-
+                      color: Color(MyColors.bg01),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                 ),
               ],
             ),
@@ -230,7 +235,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
                           const SizedBox(
                             height: 15,
                           ),
-                          const DateTimeCard(),
+                          //const DateTimeCard(),
                           const SizedBox(
                             height: 15,
                           ),
