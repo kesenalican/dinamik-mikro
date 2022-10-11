@@ -1,5 +1,6 @@
 import 'package:dinamik_otomasyon/View/screens/doctor_detail.dart';
 import 'package:dinamik_otomasyon/View/screens/home_page.dart';
+import 'package:dinamik_otomasyon/View/screens/remote_api.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_detay.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_listele.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dinamik_otomasyon">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="dinamik_otomasyon"
         android:name="${applicationName}"

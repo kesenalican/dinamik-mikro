@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../Model/stok_model.dart';
 import '../../styles/colors.dart';
 
 class StokDetaySatir extends StatefulWidget {

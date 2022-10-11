@@ -32,21 +32,11 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: ListView(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
-            //CustomAppBar(kullanciAdi: widget.sirketAdi!),
+
             const SizedBox(
               height: 10,
             ),
             const SearchInput(),
-            const SizedBox(
-              height: 20,
-            ),
-            const CategoryIcons(),
-            const CategoryIcons(),
-            const CategoryIcons(),
-            const CategoryIcons(),
             const SizedBox(
               height: 20,
             ),
@@ -61,16 +51,6 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 20,
                   ),
                 ),
-                TextButton(
-                  child: Text(
-                    'Hepsini Gör',
-                    style: TextStyle(
-                      color: Color(MyColors.yellow01),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onPressed: () {},
-                )
               ],
             ),
             const SizedBox(

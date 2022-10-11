@@ -3,7 +3,9 @@ import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_detay.dart';
 import 'package:flutter/material.dart';
 
 class StokGenel extends StatefulWidget {
-  const StokGenel({Key? key}) : super(key: key);
+  String? urunKodu;
+  String? urunAdi;
+   StokGenel({Key? key, required this.urunAdi, required this.urunKodu}) : super(key: key);
 
   @override
   State<StokGenel> createState() => _StokGenelState();
@@ -21,7 +23,7 @@ class _StokGenelState extends State<StokGenel> {
         width: double.infinity,
         child: ListView(
           children: [
-            StokDetaySatir(stokOzellik: "Ürün Kodu", aciklama: "0001"),
+            StokDetaySatir(stokOzellik: "Ürün Kodu", aciklama: widget.urunKodu),
             StokDetaySatir(stokOzellik: "Ürün Adı", aciklama: "Dinamik"),
             StokDetaySatir(stokOzellik: "Barkod", aciklama: "dnmk01"),
             StokDetaySatir(stokOzellik: "Bakiye", aciklama: "300"),

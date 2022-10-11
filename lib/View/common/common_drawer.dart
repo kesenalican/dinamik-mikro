@@ -1,3 +1,4 @@
+import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_listele.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/login.dart';
@@ -29,7 +30,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Drawer(
-
       child: Column(
         children: [
           Container(
@@ -77,12 +77,17 @@ Widget _buildList(Menu list) {
               : list.name == "Çıkış"
                   ? () => Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Login()))
-                  : () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ScheduleTab(
-                                cardName: list.name,
-                              ))),
+                  : list.name == "Stok Kart Detay"
+                      ? () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StokListele()))
+                      : () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ScheduleTab(
+                                    cardName: list.name,
+                                  ))),
           leading: Icon(
             Icons.next_plan,
             color: Color(MyColors.bg01),

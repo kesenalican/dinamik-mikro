@@ -9,7 +9,10 @@ import '../../styles/colors.dart';
 import '../common/stok_detay_satir.dart';
 
 class StokDetay extends StatefulWidget {
-  const StokDetay({Key? key}) : super(key: key);
+  String? urunKodu;
+  String? urunAdi;
+
+   StokDetay({Key? key, required this.urunKodu, required this.urunAdi}) : super(key: key);
 
   @override
   State<StokDetay> createState() => _StokDetayState();
@@ -63,10 +66,10 @@ class _StokDetayState extends State<StokDetay> {
             ],
           ),
         ),
-        body: const TabBarView(
+        body:  TabBarView(
           children: [
             //Genel Tab
-            StokGenel(),
+           // StokGenel(),
             // Fiyat Tab
             FiyatlarTab(),
             //Depo Tab
