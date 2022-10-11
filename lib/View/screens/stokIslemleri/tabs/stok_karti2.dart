@@ -77,13 +77,7 @@ class _StokKartlariState extends State<StokKartlari> {
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => StokDetay(
-                    urunKodu: "bekle",
-                    urunAdi: "bekle",
-                  )));
+
         },
         child: SingleChildScrollView(
           child: FutureBuilder<List<Stoklar>?>(

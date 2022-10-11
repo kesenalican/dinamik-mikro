@@ -140,9 +140,6 @@ List dataList = [
       {"name":"1",},
   ]
   },
-
-
-
 ];
 
 class Menu {
@@ -152,7 +149,6 @@ class Menu {
   List<Menu>? subMenu = [];
 
   Menu({ this.name,  this.subMenu, this.icon, this.tekmenu});
-
   Menu.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     icon = json['icon'];

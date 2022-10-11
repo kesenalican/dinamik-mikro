@@ -26,7 +26,6 @@ List<Map> doctors = [
   }
 ];
 
-
 class UrunListeleDeneme extends StatefulWidget {
   const UrunListeleDeneme({Key? key}) : super(key: key);
 

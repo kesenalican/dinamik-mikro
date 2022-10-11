@@ -1,26 +1,18 @@
-import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
-import 'package:dinamik_otomasyon/View/screens/common/stok_genel.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_depo_tab.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_fiyatlar_tab.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_raporlar_tab.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../Services/Providers/all_providers.dart';
 import '../../styles/colors.dart';
-import '../common/stok_detay_satir.dart';
+import '../common/stok_genel.dart';
+class StokDetay extends ConsumerWidget {
 
-class StokDetay extends StatefulWidget {
-  String? urunKodu;
-  String? urunAdi;
-
-   StokDetay({Key? key, required this.urunKodu, required this.urunAdi}) : super(key: key);
+   StokDetay({Key? key}) : super(key: key);
 
   @override
-  State<StokDetay> createState() => _StokDetayState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class _StokDetayState extends State<StokDetay> {
-  @override
-  Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return DefaultTabController(
@@ -69,7 +61,7 @@ class _StokDetayState extends State<StokDetay> {
         body:  TabBarView(
           children: [
             //Genel Tab
-           // StokGenel(),
+            StokGenel(),
             // Fiyat Tab
             FiyatlarTab(),
             //Depo Tab

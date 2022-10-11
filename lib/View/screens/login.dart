@@ -31,7 +31,6 @@ class _LoginState extends State<Login> {
     sirketController?.dispose();
     kullaniciController?.dispose();
     sifreController?.dispose();
-
     super.dispose();
   }
 
@@ -40,49 +39,51 @@ class _LoginState extends State<Login> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        color: Color(MyColors.primary),
-        height: h,
-        width: w,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: h * 0.15,
-            ),
-            Logo(),
-            SizedBox(
-              height: h * 0.15,
-            ),
-            inputField("Şirket Adı", Icons.account_balance, sirketController!),
-            inputField("Kullanıcı Adı", Icons.supervised_user_circle,
-                kullaniciController!),
-            inputField("Şifre", Icons.password, sifreController!),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  activeColor: Colors.white,
-                  value: rememberMe,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      this.value = value;
-                    });
-                  },
-                ),
-                const Text(
-                  "Beni hatırla",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: Container(
+          color: Color(MyColors.primary),
+          height: h,
+          width: w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: h * 0.15,
+              ),
+              Logo(),
+              SizedBox(
+                height: h * 0.15,
+              ),
+              inputField("Şirket Adı", Icons.account_balance, sirketController!),
+              inputField("Kullanıcı Adı", Icons.supervised_user_circle,
+                  kullaniciController!),
+              inputField("Şifre", Icons.password, sifreController!),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Checkbox(
+                    checkColor: Colors.white,
+                    activeColor: Colors.white,
+                    value: rememberMe,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        this.value = value;
+                      });
+                    },
                   ),
-                ),
-              ],
-            ),
-            loginButton("Giriş Yap"),
-          ],
+                  const Text(
+                    "Beni hatırla",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              loginButton("Giriş Yap"),
+            ],
+          ),
         ),
       ),
     );

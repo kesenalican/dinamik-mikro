@@ -1,6 +1,4 @@
-import 'package:dinamik_otomasyon/View/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
-
 import '../../common/common_appbar.dart';
 import '../../styles/colors.dart';
 

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 Stoklar stoklarFromMap(String str) => Stoklar.fromMap(json.decode(str));
@@ -15,12 +14,12 @@ class Stoklar {
   final String stoIsim;
 
   factory Stoklar.fromMap(Map<String, dynamic> json) => Stoklar(
-    stoKod: json["sto_kod"],
-    stoIsim: json["sto_isim"],
-  );
+        stoKod: json["StokKodu"],
+        stoIsim: json["StokIsim"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "sto_kod": stoKod,
-    "sto_isim": stoIsim,
-  };
+        "StokKodu": stoKod,
+        "StokIsim": stoIsim,
+      };
 }
