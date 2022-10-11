@@ -1,9 +1,6 @@
-import 'package:dinamik_otomasyon/View/common/custom_appbar.dart';
-import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_detay.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_karti.dart';
 import 'package:flutter/material.dart';
 import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
-
 import '../../../Model/stok_depo_detay.dart';
 import '../../common/search_input.dart';
 import '../../styles/colors.dart';
@@ -75,8 +72,8 @@ class _StokListeleState extends State<StokListele> {
               ),
             ),
 
-            StokKartlari(),
-
+            const StokKartlari(),
+           // StokKartlari2(),
 
           ],
         ),
