@@ -1,3 +1,4 @@
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/cari_kartlar.dart';
 import 'package:dinamik_otomasyon/View/screens/doctor_detail.dart';
 import 'package:dinamik_otomasyon/View/screens/home_page.dart';
 import 'package:dinamik_otomasyon/View/screens/remote_api.dart';

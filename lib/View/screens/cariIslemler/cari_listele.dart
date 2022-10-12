@@ -1,21 +1,22 @@
-import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_karti.dart';
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/cari_kartlar.dart';
 import 'package:flutter/material.dart';
-import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
+
+import '../../common/common_appbar.dart';
 import '../../common/search_input.dart';
 import '../../styles/colors.dart';
 
-class StokListele extends StatefulWidget {
-  const StokListele({Key? key}) : super(key: key);
+class CariListele extends StatefulWidget {
+  const CariListele({Key? key}) : super(key: key);
 
   @override
-  State<StokListele> createState() => _StokListeleState();
+  State<CariListele> createState() => _CariListeleState();
 }
 
-class _StokListeleState extends State<StokListele> {
+class _CariListeleState extends State<CariListele> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppbar(whichPage: "Stok Kartlari"),
+      appBar: CommonAppbar(whichPage: "Cariler"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -23,9 +24,9 @@ class _StokListeleState extends State<StokListele> {
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: SearchInput(),
             ),
+            //Hepsini Listele Butonu
             listeleButton(),
-            const StokKartlari(),
-            // StokKartlari2(),
+            const CariKartlar(),
           ],
         ),
       ),
@@ -36,8 +37,8 @@ class _StokListeleState extends State<StokListele> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        padding: EdgeInsets.all(10),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        padding: const EdgeInsets.all(10),
         width: double.infinity,
         decoration: BoxDecoration(
           color: Color(MyColors.bg01),

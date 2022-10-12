@@ -1,6 +1,7 @@
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/cari_kartlar.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_listele.dart';
 import 'package:flutter/material.dart';
-
+import '../screens/cariIslemler/cari_listele.dart';
 import '../screens/login.dart';
 import '../screens/module_card.dart';
 import '../screens/settings.dart';
@@ -33,14 +34,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               left: 10,
               right: 10,
               top: 10,
             ),
             height: h * 0.15,
             child: UserAccountsDrawerHeader(
-              accountName: Text("SELAM DİNAMİK"),
+              accountName: const Text("SELAM DİNAMİK"),
               accountEmail: null,
               currentAccountPictureSize: Size.zero,
               decoration: BoxDecoration(
@@ -51,11 +52,12 @@ class _DrawerMenuState extends State<DrawerMenu> {
           ),
           Expanded(
             child: ListView.builder(
-                shrinkWrap: false,
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  return _buildList(data[index]);
-                }),
+              shrinkWrap: false,
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                return _buildList(data[index]);
+              },
+            ),
           ),
         ],
       ),
@@ -82,12 +84,17 @@ Widget _buildList(Menu list) {
                           context,
                           MaterialPageRoute(
                               builder: (context) => StokListele()))
-                      : () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ScheduleTab(
-                                    cardName: list.name,
-                                  ))),
+                      : list.name == "Cari İşlemler"
+                          ? () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CariListele()))
+                          : () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScheduleTab(
+                                        cardName: list.name,
+                                      ))),
           leading: Icon(
             Icons.next_plan,
             color: Color(MyColors.bg01),
