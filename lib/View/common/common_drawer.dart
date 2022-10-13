@@ -1,4 +1,5 @@
 import 'package:dinamik_otomasyon/View/screens/cariIslemler/cari_kartlar.dart';
+import 'package:dinamik_otomasyon/View/screens/faturaIslemleri/satisFaturasi/satis_faturasi.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_listele.dart';
 import 'package:flutter/material.dart';
 import '../screens/cariIslemler/cari_listele.dart';
@@ -89,12 +90,17 @@ Widget _buildList(Menu list) {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CariListele()))
-                          : () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ScheduleTab(
-                                        cardName: list.name,
-                                      ))),
+                          : list.name == "Satış Faturaları"
+                              ? () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SatisFaturasi()))
+                              : () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ScheduleTab(
+                                            cardName: list.name,
+                                          ))),
           leading: Icon(
             Icons.next_plan,
             color: Color(MyColors.bg01),

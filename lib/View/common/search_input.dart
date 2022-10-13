@@ -17,10 +17,12 @@ class _SearchInputState extends State<SearchInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Color(MyColors.bg),
         borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: Color(MyColors.bg01),),
       ),
       padding:const  EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       child: Row(
