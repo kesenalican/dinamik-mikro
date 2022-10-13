@@ -1,6 +1,7 @@
 import 'package:dinamik_otomasyon/View/styles/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/constant.dart';
 import 'home_page.dart';
 
 class Login extends StatefulWidget {
@@ -55,10 +56,10 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: h * 0.15,
               ),
-              inputField("Şirket Adı", Icons.account_balance, sirketController!),
-              inputField("Kullanıcı Adı", Icons.supervised_user_circle,
+              inputField(Constants.SIRKET_ADI  , Icons.account_balance, sirketController!),
+              inputField(Constants.KULLANICI_ADI, Icons.supervised_user_circle,
                   kullaniciController!),
-              inputField("Şifre", Icons.password, sifreController!),
+              inputField(Constants.SIFRE, Icons.password, sifreController!),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -73,7 +74,7 @@ class _LoginState extends State<Login> {
                     },
                   ),
                   const Text(
-                    "Beni hatırla",
+                    Constants.BENI_HATIRLA,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -81,7 +82,7 @@ class _LoginState extends State<Login> {
                   ),
                 ],
               ),
-              loginButton("Giriş Yap"),
+              loginButton(Constants.GIRIS_YAP),
             ],
           ),
         ),
@@ -94,7 +95,7 @@ class _LoginState extends State<Login> {
     double w = MediaQuery.of(context).size.width;
     return Container(
       child: Image(
-        image: AssetImage("assets/logo.png"),
+        image:const  AssetImage(Constants.LOGO),
         width: w * 0.7,
         height: h * 0.2,
       ),

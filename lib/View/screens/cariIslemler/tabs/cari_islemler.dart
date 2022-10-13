@@ -1,14 +1,10 @@
-import 'package:dinamik_otomasyon/View/styles/colors.dart';
 import 'package:flutter/material.dart';
 
-class RaporlarTab extends StatefulWidget {
-  const RaporlarTab({Key? key}) : super(key: key);
+import '../../../styles/colors.dart';
 
-  @override
-  State<RaporlarTab> createState() => _RaporlarTabState();
-}
+class CariIslemlerTab extends StatelessWidget {
+  const CariIslemlerTab({Key? key}) : super(key: key);
 
-class _RaporlarTabState extends State<RaporlarTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -16,29 +12,33 @@ class _RaporlarTabState extends State<RaporlarTab> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            raporListe(raporAdi: "Stok Bakiye Listesi"),
-            raporListe(raporAdi: "Stok Envanter Raporu"),
-            raporListe(raporAdi: "Depoda Hangi Ürünler Mevcut"),
-            raporListe(raporAdi: "Ürün Hangi Depoda"),
-            raporListe(raporAdi: "Satışı Yapılmayan Ürünler"),
-            raporListe(raporAdi: "En Çok Satılan Ürünler"),
-            raporListe(raporAdi: "En Çok Alınan Ürünler"),
+            islemList(raporAdi: "Satış Faturası",icon: Icons.receipt_long),
+            islemList(raporAdi: "Alış Faturası",icon: Icons.call_received),
+            islemList(raporAdi: "Satış Siparişi",icon:Icons.account_tree_sharp),
+            islemList(raporAdi: "Alış Siparişi"),
+            islemList(raporAdi: "Satış Teklifi"),
+            islemList(raporAdi: "Alım Teklifi"),
+            islemList(raporAdi: "Satış İrsaliyesi"),
+            islemList(raporAdi: "Alım İrsaliyesi"),
+            islemList(raporAdi: "Ziyaret"),
+            islemList(raporAdi: "Tahsilat"),
+            islemList(raporAdi: "Ödeme"),
           ],
         ),
       ),
     );
   }
 
-  Widget raporListe({String? raporAdi}) {
+  Widget islemList({String? raporAdi, IconData? icon}) {
     return GestureDetector(
       onTap: (){},
       child: Container(
-        margin: EdgeInsets.only(top:15),
-        padding: EdgeInsets.all(15),
+        margin:const EdgeInsets.only(top:15),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Color(MyColors.bg03),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color(MyColors.bg01))
+            color: Color(MyColors.bg03),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Color(MyColors.bg01))
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,7 +48,7 @@ class _RaporlarTabState extends State<RaporlarTab> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(Icons.auto_graph,color: Color(MyColors.bg01), size: 40,),
+                    child: Icon(icon,color: Color(MyColors.bg01), size: 20,),
                   ),
                   Text(raporAdi!, style: TextStyle(
                     color: Color(MyColors.bg01),
@@ -60,7 +60,6 @@ class _RaporlarTabState extends State<RaporlarTab> {
             Container(
               child: Row(
                 children: [
-                  Icon(Icons.star_border_purple500_sharp, color: Color(MyColors.bg01),size: 30,),
                   Icon(Icons.navigate_next, color: Color(MyColors.bg01),size: 30,),
                 ],
               ),

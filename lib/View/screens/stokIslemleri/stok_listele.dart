@@ -1,11 +1,14 @@
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_karti.dart';
 import 'package:flutter/material.dart';
 import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../Model/stoklar_model.dart';
+import '../../../Services/Providers/all_providers.dart';
 import '../../common/search_input.dart';
 import '../../styles/colors.dart';
 
 class StokListele extends StatefulWidget {
-  const StokListele({Key? key}) : super(key: key);
+  StokListele({Key? key}) : super(key: key);
 
   @override
   State<StokListele> createState() => _StokListeleState();
@@ -14,17 +17,32 @@ class StokListele extends StatefulWidget {
 class _StokListeleState extends State<StokListele> {
   @override
   Widget build(BuildContext context) {
+    List<Stoklar> searchList = [];
+    List<Stoklar> _stockList = [];
+    void searchFunc(String value) {
+      _stockList.forEach((stok) {
+        if (stok.stoIsim.contains(value)) {
+          searchList.add(stok);
+          setState(() {});
+        }
+      });
+    }
+
     return Scaffold(
       appBar: CommonAppbar(whichPage: "Stok Kartlari"),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Padding(
+             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),
-              child: SearchInput(),
+              child: SearchInput(
+
+              ),
             ),
             listeleButton(),
-            const StokKartlari(),
+            const StokKartlari(
+
+            ),
             // StokKartlari2(),
           ],
         ),

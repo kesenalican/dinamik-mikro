@@ -36,7 +36,9 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 10,
             ),
-            const SearchInput(),
+             SearchInput(
+
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -100,57 +102,7 @@ class _HomePageState extends State<HomePage> {
               cardName: Modules[3],
               iconData: const Icon(Icons.warehouse),
             ),
-            ModuleCardButton(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ScheduleTab(
-                              cardName: Modules[0],
-                            )));
-              },
-              cardName: Modules[0],
-              iconData: const Icon(Icons.attach_money_rounded),
-            ),
-            ModuleCardButton(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ScheduleTab(
-                              cardName: Modules[1],
-                            )));
-              },
-              cardName: Modules[1],
-              iconData: const Icon(Icons.account_tree_sharp),
-            ),
-            ModuleCardButton(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ScheduleTab(
-                              cardName: Modules[2],
-                            )));
-              },
-              cardName: Modules[2],
-              iconData: const Icon(Icons.info_outline_rounded),
-            ),
-            ModuleCardButton(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ScheduleTab(
-                              cardName: Modules[3],
-                            )));
-              },
-              cardName: Modules[3],
-              iconData: const Icon(Icons.warehouse),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+
           ],
         ),
       ),

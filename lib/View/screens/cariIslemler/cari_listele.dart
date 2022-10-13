@@ -1,33 +1,38 @@
+import 'package:dinamik_otomasyon/Services/Providers/all_providers.dart';
 import 'package:dinamik_otomasyon/View/screens/cariIslemler/cari_kartlar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../Model/cariler.dart';
 import '../../common/common_appbar.dart';
 import '../../common/search_input.dart';
 import '../../styles/colors.dart';
 
-class CariListele extends StatefulWidget {
+class CariListele extends ConsumerWidget {
   const CariListele({Key? key}) : super(key: key);
 
   @override
-  State<CariListele> createState() => _CariListeleState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class _CariListeleState extends State<CariListele> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: CommonAppbar(whichPage: "Cariler"),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              child: SearchInput(),
-            ),
-            //Hepsini Listele Butonu
-            listeleButton(),
-            const CariKartlar(),
-          ],
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          ref.read(carilerProvider);
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: SearchInput(),
+              ),
+              //Hepsini Listele Butonu
+              listeleButton(),
+              const CariKartlar(),
+            ],
+          ),
         ),
       ),
     );

@@ -10,7 +10,6 @@ class StokKartlari extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var _liste = ref.watch(stoklarProvider);
-
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Padding(
@@ -18,7 +17,11 @@ class StokKartlari extends ConsumerWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => StokDetay()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => StokDetay(
+                        index: 4,
+                      )));
         },
         child: SingleChildScrollView(
           child: Container(
@@ -47,7 +50,8 @@ class StokKartlari extends ConsumerWidget {
                                 Expanded(
                                   flex: 9,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         liste[index].stoIsim,
@@ -103,7 +107,6 @@ class StokKartlari extends ConsumerWidget {
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
-
                                     ],
                                   ),
                                 ),

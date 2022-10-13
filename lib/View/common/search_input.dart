@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../styles/colors.dart';
 
 class SearchInput extends StatefulWidget {
+
   const SearchInput({
     Key? key,
+
   }) : super(key: key);
 
   @override

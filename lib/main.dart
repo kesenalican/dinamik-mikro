@@ -5,6 +5,7 @@ import 'package:dinamik_otomasyon/View/screens/remote_api.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_detay.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_listele.dart';
 import 'package:flutter/material.dart';
+import 'View/screens/cariIslemler/cari_detay.dart';
 import 'View/screens/login.dart';
 import 'View/screens/settings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

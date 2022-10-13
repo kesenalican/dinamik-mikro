@@ -1,23 +1,20 @@
-import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_depo_tab.dart';
-import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_fiyatlar_tab.dart';
-import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_raporlar_tab.dart';
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_bakiye.dart';
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_genel.dart';
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_iletisim.dart';
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_islemler.dart';
+import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_raporlar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../Services/Providers/all_providers.dart';
+
 import '../../styles/colors.dart';
 import '../common/stok_genel.dart';
-class StokDetay extends ConsumerWidget {
-  int? index;
 
-   StokDetay({Key? key, required this.index}) : super(key: key);
+class CariDetay extends StatelessWidget {
+  const CariDetay({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
+  Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: Scaffold(
         appBar: AppBar(
           leading: BackButton(
@@ -27,7 +24,7 @@ class StokDetay extends ConsumerWidget {
             },
           ),
           title: Text(
-            "Stok Detay",
+            "Cari Detay",
             style: TextStyle(
                 color: Color(MyColors.bg), fontWeight: FontWeight.w600),
           ),
@@ -42,11 +39,16 @@ class StokDetay extends ConsumerWidget {
               ),
               Tab(
                 icon: Icon(Icons.price_change_rounded),
-                text: "Fiyatlar",
+                text: "İşlemler",
               ),
               Tab(
-                icon: Icon(Icons.warehouse),
-                text: "Depo",
+                icon: Icon(Icons.currency_exchange),
+                text: "Bakiye",
+              ),
+              Tab(
+                icon: Icon(Icons.call),
+                text: "İletişim",
+
               ),
               Tab(
                 icon: Icon(Icons.report_gmailerrorred),
@@ -59,16 +61,17 @@ class StokDetay extends ConsumerWidget {
             ],
           ),
         ),
-        body:  const TabBarView(
+        body:  TabBarView(
           children: [
             //Genel Tab
-            StokGenel(),
-            // Fiyat Tab
-            FiyatlarTab(),
-            //Depo Tab
-            DepoTab(),
-            // RaporlarTab
-            RaporlarTab(),
+            CariGenelTab(),
+            //Icon(Icons.directions_bike),
+            //Islemler Tab
+            CariIslemlerTab(),
+            //Bakiye İslemleri
+            CariBakiyeTab(),
+            CariIletisimTab(),
+            CariRaporlarTab(),
             Icon(Icons.directions_bike),
           ],
         ),
