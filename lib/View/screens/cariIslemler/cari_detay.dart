@@ -5,12 +5,19 @@ import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_islemler.d
 import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_raporlar.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Model/cariler.dart';
 import '../../styles/colors.dart';
 import '../common/stok_genel.dart';
 
-class CariDetay extends StatelessWidget {
-  const CariDetay({Key? key}) : super(key: key);
+class CariDetay extends StatefulWidget {
+  Cariler cariList;
+   CariDetay({Key? key, required this.cariList}) : super(key: key);
 
+  @override
+  State<CariDetay> createState() => _CariDetayState();
+}
+
+class _CariDetayState extends State<CariDetay> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -64,13 +71,17 @@ class CariDetay extends StatelessWidget {
         body:  TabBarView(
           children: [
             //Genel Tab
-            CariGenelTab(),
+            CariGenelTab(
+              cariList: widget.cariList,
+            ),
             //Icon(Icons.directions_bike),
             //Islemler Tab
             CariIslemlerTab(),
             //Bakiye İslemleri
             CariBakiyeTab(),
-            CariIletisimTab(),
+            CariIletisimTab(
+              cariler: widget.cariList,
+            ),
             CariRaporlarTab(),
             Icon(Icons.directions_bike),
           ],

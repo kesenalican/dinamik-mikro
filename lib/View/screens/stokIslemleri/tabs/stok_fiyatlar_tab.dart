@@ -1,19 +1,18 @@
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/son_satis_fiyatlari.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../Model/stoklar_model.dart';
 import '../../../styles/colors.dart';
 
-class FiyatlarTab extends StatefulWidget {
-  const FiyatlarTab({Key? key}) : super(key: key);
+class FiyatlarTab extends ConsumerWidget {
+  Stoklar stokModel;
+
+  FiyatlarTab({Key? key, required this.stokModel}) : super(key: key);
 
   @override
-  State<FiyatlarTab> createState() => _FiyatlarTabState();
-}
-
-class _FiyatlarTabState extends State<FiyatlarTab> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Container(
         child: Column(
@@ -74,12 +73,12 @@ class _FiyatlarTabState extends State<FiyatlarTab> {
                         ],
                       ),
                       Row(
-                        children: const [
+                        children:  [
                           Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Text("Fiyat: 25.00 Türk Lirası"),
+                            child: Text("Fiyat:${stokModel.stokFiyat} Türk Lirası"),
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text("  Adet Fiyatı"),
                           ),
@@ -97,10 +96,12 @@ class _FiyatlarTabState extends State<FiyatlarTab> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (context) => SonSatisFiyatlari(
-                      satisMi: true,
-                    )));
-
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => SonSatisFiyatlari(
+                                  satisMi: true,
+                                )));
                   },
                   child: Container(
                     margin:
@@ -125,9 +126,12 @@ class _FiyatlarTabState extends State<FiyatlarTab> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (context) => SonSatisFiyatlari(
-                      satisMi: false,
-                    )));
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => SonSatisFiyatlari(
+                                  satisMi: false,
+                                )));
                   },
                   child: Container(
                     margin:
@@ -152,11 +156,9 @@ class _FiyatlarTabState extends State<FiyatlarTab> {
                 ),
               ],
             ),
-
           ],
         ),
       ),
     );
   }
-
 }

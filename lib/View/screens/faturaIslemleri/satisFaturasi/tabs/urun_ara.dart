@@ -6,11 +6,17 @@ import 'package:flutter/material.dart';
 import '../../../../common/common_button.dart';
 import '../../../../styles/colors.dart';
 
-class UrunAra extends StatelessWidget {
+class UrunAra extends StatefulWidget {
   const UrunAra({Key? key}) : super(key: key);
 
   @override
+  State<UrunAra> createState() => _UrunAraState();
+}
+
+class _UrunAraState extends State<UrunAra> {
+  @override
   Widget build(BuildContext context) {
+    List<bool> isSelected = [true, false];
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
@@ -18,46 +24,37 @@ class UrunAra extends StatelessWidget {
         children: [
           //ÜRÜN FİLTRELEME KISMI
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(
               children: [
                 //STOK KARTI / HİZMET KARTI
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20,),
-                  margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(MyColors.bg),
-                    border: Border.all(
-                        color: Color(
-                          MyColors.bg01,
-                        ),
-                        width: 2),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1,
-                            color: Color(MyColors.bg01),
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child:  Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text("Stok Kartı",style: purpleTxtStyle),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          child: Text("Hizmet Kartı",style: purpleTxtStyle,),
-                        ),
-                      ),
-                    ],
-                  ),
+                ToggleButtons(
+                  fillColor: Color(MyColors.bg01),
+                  onPressed: (int newIndex) {
+                    setState(() {
+                      for(int index=0; index < isSelected.length; index++){
+                        if(index==newIndex){
+                          isSelected[index]=true;
+                        }else{
+                          isSelected[index] = false;
+                        }
+                      }
+                    });
+                  },
+                  color: Color(MyColors.bg01),
+                  selectedColor: Colors.white,
+                  isSelected: isSelected,
+                  borderRadius: BorderRadius.circular(10),
+                  children: const [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Stok Kartı"),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Hizmet Kartı"),
+                    ),
+                  ],
                 ),
 
                 SearchInput(),
@@ -68,13 +65,6 @@ class UrunAra extends StatelessWidget {
             ),
           ),
           //ÜRÜN ARAMA KISMI
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                StokKartlari(),
-              ],
-            ),
-          ),
         ],
       ),
     );

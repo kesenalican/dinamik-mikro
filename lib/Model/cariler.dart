@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 Cariler carilerFromMap(String str) => Cariler.fromMap(json.decode(str));
@@ -14,6 +13,7 @@ class Cariler {
     required this.cariVDaireNo,
     required this.cariEmail,
     required this.cariCepTel,
+    required this.cariBakiye,
   });
 
   final String cariKodu;
@@ -23,24 +23,27 @@ class Cariler {
   final String cariVDaireNo;
   final String cariEmail;
   final String cariCepTel;
+  final double cariBakiye;
 
   factory Cariler.fromMap(Map<String, dynamic> json) => Cariler(
-    cariKodu: json["CariKodu"],
-    cariUnvani1: json["CariUnvani1"],
-    cariUnvani2: json["CariUnvani2"],
-    cariVDaireAdi: json["CariVDaireAdi"],
-    cariVDaireNo: json["CariVDaireNo"],
-    cariEmail: json["CariEmail"],
-    cariCepTel: json["CariCepTel"],
-  );
+        cariKodu: json["CariKodu"],
+        cariUnvani1: json["CariUnvani1"],
+        cariUnvani2: json["CariUnvani2"],
+        cariVDaireAdi: json["CariVDaireAdi"],
+        cariVDaireNo: json["CariVDaireNo"],
+        cariEmail: json["CariEmail"],
+        cariCepTel: json["CariCepTel"],
+        cariBakiye: json["CariBakiye"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "CariKodu": cariKodu,
-    "CariUnvani1": cariUnvani1,
-    "CariUnvani2": cariUnvani2,
-    "CariVDaireAdi": cariVDaireAdi,
-    "CariVDaireNo": cariVDaireNo,
-    "CariEmail": cariEmail,
-    "CariCepTel": cariCepTel,
-  };
+        "CariKodu": cariKodu,
+        "CariUnvani1": cariUnvani1,
+        "CariUnvani2": cariUnvani2,
+        "CariVDaireAdi": cariVDaireAdi,
+        "CariVDaireNo": cariVDaireNo,
+        "CariEmail": cariEmail,
+        "CariCepTel": cariCepTel,
+        "CariBakiye": cariBakiye,
+      };
 }

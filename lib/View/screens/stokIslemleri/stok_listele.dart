@@ -21,7 +21,7 @@ class _StokListeleState extends State<StokListele> {
     List<Stoklar> _stockList = [];
     void searchFunc(String value) {
       _stockList.forEach((stok) {
-        if (stok.stoIsim.contains(value)) {
+        if (stok.stokIsim.contains(value)) {
           searchList.add(stok);
           setState(() {});
         }
@@ -36,7 +36,6 @@ class _StokListeleState extends State<StokListele> {
              const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: SearchInput(
-
               ),
             ),
             listeleButton(),

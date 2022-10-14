@@ -1,13 +1,17 @@
 import 'package:dinamik_otomasyon/View/styles/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../Model/cariler.dart';
 import '../../../styles/colors.dart';
 
-class CariIletisimTab extends StatelessWidget {
-  const CariIletisimTab({Key? key}) : super(key: key);
+class CariIletisimTab extends ConsumerWidget {
+  Cariler cariler;
+   CariIletisimTab({Key? key, required this.cariler}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -50,18 +54,30 @@ class CariIletisimTab extends StatelessWidget {
                 "Telefon No",
                 style: purpleTxtStyle,
               )),
+
           Expanded(
-              flex: 2,
+              flex: 1,
               child: Text(
                 ":",
                 style: purpleTxtStyle,
               )),
-          const Expanded(
-            flex: 1,
-            child: CircleAvatar(
-              child: Icon(
-                Icons.add_call,
-                color: Colors.white,
+          Expanded(
+              flex: 3,
+              child: Text(
+                cariler.cariCepTel,
+                style: purpleTxtStyle,
+              )),
+          InkWell(
+            onTap: (){
+              launchUrl("tel:+99364921507");
+            },
+            child:  Expanded(
+              flex: 1,
+              child: CircleAvatar(
+                child: Icon(
+                  Icons.add_call,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

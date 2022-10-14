@@ -15,21 +15,28 @@ class CariKartlar extends ConsumerWidget {
     double w = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CariDetay()));
-        },
-        child: SingleChildScrollView(
-          child: Container(
-            height: h * 0.75,
-            width: double.infinity,
-            child: _cariListe.when(
-              data: (cariListe) {
-                return ListView.builder(
-                    itemCount: 100,
-                    itemBuilder: (context, index) {
-                      return Container(
+      child: SingleChildScrollView(
+        child: Container(
+          height: h * 0.75,
+          width: double.infinity,
+          child: _cariListe.when(
+            data: (data) {
+              return ListView.builder(
+                  itemCount: 100,
+                  itemBuilder: (context, index) {
+                    List<Cariler> cariListe = data.map((e) => e).toList();
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CariDetay(
+                              cariList: cariListe[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
                         margin: const EdgeInsets.all(5),
                         child: Card(
                           elevation: 4,
@@ -80,24 +87,21 @@ class CariKartlar extends ConsumerWidget {
                             ),
                           ),
                         ),
-                      );
-                    });
-              },
-              error: (err, stack) {
-                return Center(
-                  child: Text("Hata çıktı ${err.toString()}"),
-                );
-              },
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
+                      ),
+                    );
+                  });
+            },
+            error: (err, stack) {
+              return Center(
+                child: Text("Hata çıktı ${err.toString()}"),
+              );
+            },
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
             ),
           ),
         ),
       ),
     );
   }
-
-
-
 }

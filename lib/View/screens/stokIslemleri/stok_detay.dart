@@ -3,19 +3,22 @@ import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_fiyatlar_
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_raporlar_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../Model/stoklar_model.dart';
 import '../../../Services/Providers/all_providers.dart';
 import '../../styles/colors.dart';
 import '../common/stok_genel.dart';
-class StokDetay extends ConsumerWidget {
-  int? index;
+class StokDetay extends StatefulWidget {
+  final Stoklar stokModel;
 
-   StokDetay({Key? key, required this.index}) : super(key: key);
+   StokDetay({Key? key, required this.stokModel}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<StokDetay> createState() => _StokDetayState();
+}
 
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
+class _StokDetayState extends State<StokDetay> {
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -59,12 +62,16 @@ class StokDetay extends ConsumerWidget {
             ],
           ),
         ),
-        body:  const TabBarView(
+        body:   TabBarView(
           children: [
             //Genel Tab
-            StokGenel(),
+            StokGenel(
+              stokModel: widget.stokModel,
+            ),
             // Fiyat Tab
-            FiyatlarTab(),
+            FiyatlarTab(
+              stokModel: widget.stokModel,
+            ),
             //Depo Tab
             DepoTab(),
             // RaporlarTab
