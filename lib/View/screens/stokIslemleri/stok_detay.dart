@@ -2,15 +2,15 @@ import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_depo_tab.
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_fiyatlar_tab.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/tabs/stok_raporlar_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Model/stoklar_model.dart';
-import '../../../Services/Providers/all_providers.dart';
+import '../../../constants/constant.dart';
 import '../../styles/colors.dart';
 import '../common/stok_genel.dart';
+
 class StokDetay extends StatefulWidget {
   final Stoklar stokModel;
 
-   StokDetay({Key? key, required this.stokModel}) : super(key: key);
+  StokDetay({Key? key, required this.stokModel}) : super(key: key);
 
   @override
   State<StokDetay> createState() => _StokDetayState();
@@ -30,39 +30,39 @@ class _StokDetayState extends State<StokDetay> {
             },
           ),
           title: Text(
-            "Stok Detay",
+            Constants.STOK_DETAY,
             style: TextStyle(
                 color: Color(MyColors.bg), fontWeight: FontWeight.w600),
           ),
-          iconTheme: IconThemeData(color: Color(MyColors.bg01), size: 30),
+          iconTheme: IconThemeData(color: Color(MyColors.bg01)),
           backgroundColor: Color(MyColors.bg01),
           elevation: 0,
           bottom: const TabBar(
             tabs: [
               Tab(
                 icon: Icon(Icons.info_outline),
-                text: "Genel",
+                text: Constants.GENEL,
               ),
               Tab(
                 icon: Icon(Icons.price_change_rounded),
-                text: "Fiyatlar",
+                text: Constants.FIYATLAR,
               ),
               Tab(
                 icon: Icon(Icons.warehouse),
-                text: "Depo",
+                text: Constants.DEPO,
               ),
               Tab(
                 icon: Icon(Icons.report_gmailerrorred),
-                text: "Raporlar",
+                text: Constants.RAPORLAR,
               ),
               Tab(
                 icon: Icon(Icons.auto_graph),
-                text: "Grafikler",
+                text: Constants.RAPORLAR,
               ),
             ],
           ),
         ),
-        body:   TabBarView(
+        body: TabBarView(
           children: [
             //Genel Tab
             StokGenel(
@@ -73,10 +73,10 @@ class _StokDetayState extends State<StokDetay> {
               stokModel: widget.stokModel,
             ),
             //Depo Tab
-            DepoTab(),
+            const DepoTab(),
             // RaporlarTab
-            RaporlarTab(),
-            Icon(Icons.directions_bike),
+            const RaporlarTab(),
+            const Icon(Icons.directions_bike),
           ],
         ),
       ),

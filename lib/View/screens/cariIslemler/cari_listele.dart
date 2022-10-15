@@ -1,9 +1,9 @@
 import 'package:dinamik_otomasyon/Services/Providers/all_providers.dart';
 import 'package:dinamik_otomasyon/View/screens/cariIslemler/cari_kartlar.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../Model/cariler.dart';
+import '../../../constants/constant.dart';
 import '../../common/common_appbar.dart';
 import '../../common/search_input.dart';
 import '../../styles/colors.dart';
@@ -16,7 +16,7 @@ class CariListele extends ConsumerWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: CommonAppbar(whichPage: "Cariler"),
+      appBar: CommonAppbar(whichPage: Constants.CARILER),
       body: RefreshIndicator(
         onRefresh: ()async{
           ref.read(carilerProvider);
@@ -24,12 +24,11 @@ class CariListele extends ConsumerWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: SearchInput(),
+               Padding(
+                padding:EdgeInsets.all(2),
+                child: const SearchInput(),
               ),
-              //Hepsini Listele Butonu
-              listeleButton(),
+              buildListeleButton(context),
               const CariKartlar(),
             ],
           ),
@@ -38,11 +37,11 @@ class CariListele extends ConsumerWidget {
     );
   }
 
-  Widget listeleButton() {
+  Widget buildListeleButton(context) {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        margin:const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
         width: double.infinity,
         decoration: BoxDecoration(
@@ -54,7 +53,7 @@ class CariListele extends ConsumerWidget {
         ),
         child: const Center(
           child: Text(
-            "Hepsini Listele",
+            Constants.HEPSINI_LISTELE,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),

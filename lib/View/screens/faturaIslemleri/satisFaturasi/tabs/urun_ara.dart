@@ -1,6 +1,7 @@
 import 'package:dinamik_otomasyon/View/common/search_input.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_karti.dart';
 import 'package:dinamik_otomasyon/View/styles/styles.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/common_button.dart';
@@ -17,14 +18,12 @@ class _UrunAraState extends State<UrunAra> {
   @override
   Widget build(BuildContext context) {
     List<bool> isSelected = [true, false];
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
         children: [
           //ÜRÜN FİLTRELEME KISMI
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            margin: context.paddingDefault,
             child: Column(
               children: [
                 //STOK KARTI / HİZMET KARTI

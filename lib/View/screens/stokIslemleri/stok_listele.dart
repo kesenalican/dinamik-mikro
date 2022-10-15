@@ -1,9 +1,9 @@
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_karti.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Model/stoklar_model.dart';
-import '../../../Services/Providers/all_providers.dart';
+import '../../../constants/constant.dart';
 import '../../common/search_input.dart';
 import '../../styles/colors.dart';
 
@@ -27,22 +27,17 @@ class _StokListeleState extends State<StokListele> {
         }
       });
     }
-
     return Scaffold(
-      appBar: CommonAppbar(whichPage: "Stok Kartlari"),
+      appBar: CommonAppbar(whichPage: Constants.STOK_KARTLARI),
       body: SingleChildScrollView(
         child: Column(
           children: [
-             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              child: SearchInput(
-              ),
+              Padding(
+              padding: EdgeInsets.symmetric(horizontal: context.dynamicWidth*0.04),
+              child: const SearchInput(),
             ),
             listeleButton(),
-            const StokKartlari(
-
-            ),
-            // StokKartlari2(),
+            const StokKartlari(),
           ],
         ),
       ),
@@ -53,8 +48,8 @@ class _StokListeleState extends State<StokListele> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        padding: EdgeInsets.all(10),
+        margin: context.paddingTextField,
+        padding: context.paddingDefault,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Color(MyColors.bg01),
@@ -65,7 +60,7 @@ class _StokListeleState extends State<StokListele> {
         ),
         child: const Center(
           child: Text(
-            "Hepsini Listele",
+            Constants.HEPSINI_LISTELE,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),

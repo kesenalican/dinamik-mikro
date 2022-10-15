@@ -8,7 +8,8 @@ import '../../../styles/colors.dart';
 
 class CariIletisimTab extends ConsumerWidget {
   Cariler cariler;
-   CariIletisimTab({Key? key, required this.cariler}) : super(key: key);
+
+  CariIletisimTab({Key? key, required this.cariler}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,7 +55,6 @@ class CariIletisimTab extends ConsumerWidget {
                 "Telefon No",
                 style: purpleTxtStyle,
               )),
-
           Expanded(
               flex: 1,
               child: Text(
@@ -67,17 +67,12 @@ class CariIletisimTab extends ConsumerWidget {
                 cariler.cariCepTel,
                 style: purpleTxtStyle,
               )),
-          InkWell(
-            onTap: (){
-              launchUrl("tel:+99364921507");
-            },
-            child:  Expanded(
-              flex: 1,
-              child: CircleAvatar(
-                child: Icon(
-                  Icons.add_call,
-                  color: Colors.white,
-                ),
+          const Expanded(
+            flex: 1,
+            child: CircleAvatar(
+              child: Icon(
+                Icons.add_call,
+                color: Colors.white,
               ),
             ),
           ),
@@ -129,7 +124,7 @@ class CariIletisimTab extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         color: Color(MyColors.bg),
-        border: Border.all(color: Color(MyColors.bg01), width:2),
+        border: Border.all(color: Color(MyColors.bg01), width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

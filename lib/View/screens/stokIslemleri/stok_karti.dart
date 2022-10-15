@@ -1,4 +1,5 @@
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_detay.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Model/stoklar_model.dart';
@@ -11,13 +12,11 @@ class StokKartlari extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var _liste = ref.watch(stoklarProvider);
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
       child: SingleChildScrollView(
         child: Container(
-          height: h * 0.75,
+          height: context.dynamicHeight * 0.75,
           width: double.infinity,
           child: _liste.when(
             data: (data) {
@@ -47,7 +46,7 @@ class StokKartlari extends ConsumerWidget {
                                 backgroundColor: Color(MyColors.bg01),
                               ),
                               SizedBox(
-                                width: w * 0.01,
+                                width: context.dynamicWidth * 0.01,
                               ),
                               Expanded(
                                 flex: 9,
@@ -65,7 +64,7 @@ class StokKartlari extends ConsumerWidget {
                                       maxLines: 2,
                                     ),
                                     SizedBox(
-                                      height: h * 0.01,
+                                      height: context.dynamicHeight * 0.01,
                                     ),
                                     Text(
                                       liste[index].stokKodu,
@@ -80,7 +79,7 @@ class StokKartlari extends ConsumerWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: w * 0.10,
+                                width: context.dynamicWidth * 0.10,
                               ),
                               //FİYAT
                               Expanded(
@@ -100,7 +99,7 @@ class StokKartlari extends ConsumerWidget {
                                       ),
                                     ),
                                     Text(
-                                      "Fiyat: 123",
+                                        liste[index].stokFiyat.toString()+" TL",
                                       style: TextStyle(
                                         color: Color(MyColors.bg01),
                                         fontSize: 8,
@@ -135,3 +134,4 @@ class StokKartlari extends ConsumerWidget {
     );
   }
 }
+

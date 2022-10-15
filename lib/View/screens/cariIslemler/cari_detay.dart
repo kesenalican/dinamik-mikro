@@ -6,6 +6,7 @@ import 'package:dinamik_otomasyon/View/screens/cariIslemler/tabs/cari_raporlar.d
 import 'package:flutter/material.dart';
 
 import '../../../Model/cariler.dart';
+import '../../../constants/constant.dart';
 import '../../styles/colors.dart';
 import '../common/stok_genel.dart';
 
@@ -31,7 +32,7 @@ class _CariDetayState extends State<CariDetay> {
             },
           ),
           title: Text(
-            "Cari Detay",
+            Constants.CARI_DETAY,
             style: TextStyle(
                 color: Color(MyColors.bg), fontWeight: FontWeight.w600),
           ),
@@ -42,28 +43,28 @@ class _CariDetayState extends State<CariDetay> {
             tabs: [
               Tab(
                 icon: Icon(Icons.info_outline),
-                text: "Genel",
+                text: Constants.GENEL,
               ),
               Tab(
                 icon: Icon(Icons.price_change_rounded),
-                text: "İşlemler",
+                text:Constants.ISLEMLER,
               ),
               Tab(
                 icon: Icon(Icons.currency_exchange),
-                text: "Bakiye",
+                text: Constants.BAKIYE,
               ),
               Tab(
                 icon: Icon(Icons.call),
-                text: "İletişim",
+                text: Constants.ILETISIM,
 
               ),
               Tab(
                 icon: Icon(Icons.report_gmailerrorred),
-                text: "Raporlar",
+                text: Constants.RAPORLAR,
               ),
               Tab(
                 icon: Icon(Icons.auto_graph),
-                text: "Grafikler",
+                text: Constants.GRAFIKLER,
               ),
             ],
           ),

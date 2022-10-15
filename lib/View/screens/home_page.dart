@@ -1,5 +1,7 @@
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import '../../Model/module_name.dart';
+import '../../constants/constant.dart';
 import 'stokIslemleri/stok_listele.dart';
 import '../common/common_appbar.dart';
 import '../common/common_drawer.dart';
@@ -23,40 +25,29 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: CommonAppbar(whichPage: "Anasayfa"),
-      drawer: DrawerMenu(),
+      appBar: CommonAppbar(whichPage: Constants.ANASAYFA),
+      drawer: const DrawerMenu(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: ListView(
           children: [
-
-            const SizedBox(
-              height: 10,
-            ),
-             SearchInput(
-
-            ),
-            const SizedBox(
-              height: 20,
+            SizedBox(height: context.dynamicHeight * 0.01),
+            const SearchInput(),
+            SizedBox(
+              height: context.dynamicHeight * 0.02,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Kartlar',
-                  style: TextStyle(
-                    color: Color(MyColors.header01),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
+                  Constants.KARTLAR,
+                  style: context.theme.textTheme.headline6,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: context.dynamicHeight * 0.02,
             ),
             ModuleCardButton(
               onTap: () {
@@ -102,7 +93,6 @@ class _HomePageState extends State<HomePage> {
               cardName: Modules[3],
               iconData: const Icon(Icons.warehouse),
             ),
-
           ],
         ),
       ),
@@ -110,210 +100,5 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class TopDoctorCard extends StatelessWidget {
-  String img;
-  String doctorName;
-  String doctorTitle;
 
-  TopDoctorCard({
-    required this.img,
-    required this.doctorName,
-    required this.doctorTitle,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.only(bottom: 20),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, '/detail');
-        },
-        child: Row(
-          children: [
-            Container(
-              color: Color(MyColors.grey01),
-              child: Image(
-                width: 100,
-                image: AssetImage(img),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  doctorName,
-                  style: TextStyle(
-                    color: Color(MyColors.header01),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  doctorTitle,
-                  style: TextStyle(
-                    color: Color(MyColors.grey02),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Color(MyColors.yellow02),
-                      size: 18,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '4.0 - 50 Reviews',
-                      style: TextStyle(color: Color(MyColors.grey02)),
-                    )
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-List<Map> categories = [
-  {'icon': Icons.switch_account, 'text': 'Müşteri Kartları'},
-  {'icon': Icons.production_quantity_limits, 'text': 'Stok Kartları'},
-  {'icon': Icons.info_outline, 'text': 'Ürün Bilgisi'},
-  {'icon': Icons.account_balance, 'text': 'Cari Kartlar'},
-];
-
-class CategoryIcons extends StatelessWidget {
-  const CategoryIcons({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        for (var category in categories)
-          CategoryIcon(
-            icon: category['icon'],
-            text: category['text'],
-          ),
-      ],
-    );
-  }
-}
-
-class ScheduleCard extends StatelessWidget {
-  const ScheduleCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(MyColors.bg01),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      width: double.infinity,
-      padding: EdgeInsets.all(20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Icon(
-            Icons.calendar_today,
-            color: Colors.white,
-            size: 15,
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-            'Mon, July 29',
-            style: TextStyle(color: Colors.white),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Icon(
-            Icons.access_alarm,
-            color: Colors.white,
-            size: 17,
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Flexible(
-            child: Text(
-              '11:00 ~ 12:10',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoryIcon extends StatelessWidget {
-  IconData icon;
-  String text;
-
-  CategoryIcon({
-    required this.icon,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Color(MyColors.bg01),
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Column(
-          children: [
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Color(MyColors.bg),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: Icon(
-                icon,
-                color: Color(MyColors.primary),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                color: Color(MyColors.primary),
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

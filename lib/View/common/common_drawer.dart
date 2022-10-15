@@ -1,7 +1,8 @@
-import 'package:dinamik_otomasyon/View/screens/cariIslemler/cari_kartlar.dart';
 import 'package:dinamik_otomasyon/View/screens/faturaIslemleri/satisFaturasi/satis_faturasi.dart';
 import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_listele.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
+import '../../constants/constant.dart';
 import '../screens/cariIslemler/cari_listele.dart';
 import '../screens/login.dart';
 import '../screens/module_card.dart';
@@ -29,26 +30,18 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return Drawer(
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(
-              left: 10,
-              right: 10,
-              top: 10,
-            ),
-            height: h * 0.15,
+            height: context.dynamicHeight * 0.15,
             child: UserAccountsDrawerHeader(
-              accountName: const Text("SELAM DİNAMİK"),
+              accountName:  const Text(Constants.DINAMIK_OTOMASYON),
               accountEmail: null,
-              currentAccountPictureSize: Size.zero,
               decoration: BoxDecoration(
                 color: Color(MyColors.bg01),
-                borderRadius: BorderRadius.circular(15),
               ),
+              currentAccountPictureSize: Size.zero,
             ),
           ),
           Expanded(
@@ -74,10 +67,10 @@ Widget _buildList(Menu list) {
           hoverColor: Color(MyColors.bg01),
           selectedTileColor: Color(MyColors.bg01),
           textColor: Color(MyColors.bg01),
-          onTap: list.name == "Ayarlar"
+          onTap: list.name == Constants.AYARLAR
               ? () => Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Settings()))
-              : list.name == "Çıkış"
+              : list.name == Constants.CIKIS
                   ? () => Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Login()))
                   : list.name == "Stok Kart Detay"
@@ -85,7 +78,7 @@ Widget _buildList(Menu list) {
                           context,
                           MaterialPageRoute(
                               builder: (context) => StokListele()))
-                      : list.name == "Cari İşlemler"
+                      : list.name == Constants.CARI_ISLEMLER
                           ? () => Navigator.push(
                               context,
                               MaterialPageRoute(

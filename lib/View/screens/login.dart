@@ -1,4 +1,5 @@
 import 'package:dinamik_otomasyon/View/styles/colors.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constant.dart';
@@ -37,52 +38,44 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Container(
           color: Color(MyColors.primary),
-          height: h,
-          width: w,
+          height: context.dynamicHeight,
+          width: context.dynamicWidth,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: h * 0.15,
+              const Spacer(
+                flex: 2,
               ),
-              Logo(),
-              SizedBox(
-                height: h * 0.15,
+              Expanded(flex: 4, child: Logo()),
+              Spacer(),
+              Expanded(
+                flex: 1,
+                child: inputField(Constants.SIRKET_ADI, Icons.account_balance,
+                    sirketController!),
               ),
-              inputField(Constants.SIRKET_ADI  , Icons.account_balance, sirketController!),
-              inputField(Constants.KULLANICI_ADI, Icons.supervised_user_circle,
-                  kullaniciController!),
-              inputField(Constants.SIFRE, Icons.password, sifreController!),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    checkColor: Colors.white,
-                    activeColor: Colors.white,
-                    value: rememberMe,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        this.value = value;
-                      });
-                    },
-                  ),
-                  const Text(
-                    Constants.BENI_HATIRLA,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              Expanded(
+                flex: 1,
+                child: inputField(Constants.KULLANICI_ADI,
+                    Icons.supervised_user_circle, kullaniciController!),
               ),
-              loginButton(Constants.GIRIS_YAP),
+              Expanded(
+                flex: 1,
+                child: inputField(
+                    Constants.SIFRE, Icons.password, sifreController!),
+              ),
+              Expanded(
+                child: buildRememberMe(),
+              ),
+              Expanded(
+                flex: 1,
+                child: loginButton(Constants.GIRIS_YAP),
+              ),
+              const Spacer(flex: 2),
             ],
           ),
         ),
@@ -90,14 +83,37 @@ class _LoginState extends State<Login> {
     );
   }
 
+  Row buildRememberMe() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Checkbox(
+          checkColor: Colors.white,
+          activeColor: Colors.white,
+          value: rememberMe,
+          onChanged: (bool? value) {
+            setState(() {
+              this.value = value;
+            });
+          },
+        ),
+        const Text(
+          Constants.BENI_HATIRLA,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget Logo() {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return Container(
       child: Image(
-        image:const  AssetImage(Constants.LOGO),
-        width: w * 0.7,
-        height: h * 0.2,
+        image: const AssetImage(Constants.LOGO),
+        width: context.dynamicHeight*0.3,
+        height: context.dynamicWidth*0.8,
       ),
     );
   }
@@ -105,29 +121,26 @@ class _LoginState extends State<Login> {
   Widget inputField(
       String hint, IconData iconData, TextEditingController controller) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-      child: SizedBox(
-        height: 50,
-        child: Form(
-          child: Material(
-            elevation: 8,
-            shadowColor: Colors.black87,
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
-            child: TextFormField(
-              controller: controller,
-              textAlignVertical: TextAlignVertical.bottom,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.white,
-                hintText: hint,
-                focusColor: Color(MyColors.primary),
-                prefixIcon: Icon(iconData),
+      padding: EdgeInsets.symmetric(horizontal: context.dynamicWidth*0.08, vertical: context.dynamicHeight*0.014),
+      child: Form(
+        child: Material(
+          elevation: 8,
+          shadowColor: Colors.black87,
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+          child: TextFormField(
+            controller: controller,
+            textAlignVertical: TextAlignVertical.bottom,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
               ),
+              filled: true,
+              fillColor: Colors.white,
+              hintText: hint,
+              focusColor: Color(MyColors.primary),
+              prefixIcon: Icon(iconData),
             ),
           ),
         ),
@@ -136,8 +149,6 @@ class _LoginState extends State<Login> {
   }
 
   Widget loginButton(String title) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
@@ -150,7 +161,7 @@ class _LoginState extends State<Login> {
         );
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: w * 0.35, vertical: h * 0.02),
+        padding: EdgeInsets.symmetric(horizontal: context.dynamicWidth * 0.35, vertical: context.dynamicHeight * 0.02),
         shape: const StadiumBorder(),
         primary: Color(MyColors.header01),
         elevation: 8,
@@ -158,10 +169,7 @@ class _LoginState extends State<Login> {
       ),
       child: Text(
         title,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+        style: context.theme.textTheme.headline6?.copyWith(color: Colors.white),
       ),
     );
   }

@@ -1,5 +1,8 @@
 import 'package:dinamik_otomasyon/View/styles/colors.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../constants/constant.dart';
 
 class RaporlarTab extends StatefulWidget {
   const RaporlarTab({Key? key}) : super(key: key);
@@ -13,16 +16,35 @@ class _RaporlarTabState extends State<RaporlarTab> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        height: context.dynamicHeight,
+        margin: EdgeInsets.symmetric(
+            horizontal: context.dynamicWidth * 0.02,
+            vertical: context.dynamicHeight * 0.001),
         child: Column(
           children: [
-            raporListe(raporAdi: "Stok Bakiye Listesi"),
-            raporListe(raporAdi: "Stok Envanter Raporu"),
-            raporListe(raporAdi: "Depoda Hangi Ürünler Mevcut"),
-            raporListe(raporAdi: "Ürün Hangi Depoda"),
-            raporListe(raporAdi: "Satışı Yapılmayan Ürünler"),
-            raporListe(raporAdi: "En Çok Satılan Ürünler"),
-            raporListe(raporAdi: "En Çok Alınan Ürünler"),
+            Expanded(
+                flex: 1,
+                child: raporListe(raporAdi: Constants.STOK_BAKIYE_LISTESI)),
+            Expanded(
+                flex: 1,
+                child: raporListe(raporAdi: Constants.STOK_ENVANTER_RAPORU)),
+            Expanded(
+                flex: 1,
+                child: raporListe(
+                    raporAdi: Constants.DEPODA_HANGI_URUNLER_MEVCUT)),
+            Expanded(
+                flex: 1,
+                child: raporListe(raporAdi: Constants.URUN_HANGI_DEPODA)),
+            Expanded(
+                flex: 1,
+                child:
+                    raporListe(raporAdi: Constants.SATISI_YAPILMAYAN_URUNLER)),
+            Expanded(
+                flex: 1,
+                child: raporListe(raporAdi: Constants.EN_COK_SATILAN_URUNLER)),
+            Expanded(
+                flex: 1,
+                child: raporListe(raporAdi: Constants.EN_COK_ALINAN_URUNLER)),
           ],
         ),
       ),
@@ -31,42 +53,47 @@ class _RaporlarTabState extends State<RaporlarTab> {
 
   Widget raporListe({String? raporAdi}) {
     return GestureDetector(
-      onTap: (){},
+      onTap: () {},
       child: Container(
-        margin: EdgeInsets.only(top:15),
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.symmetric(horizontal: context.dynamicWidth * 0.02),
+        margin: context.paddingDefault,
         decoration: BoxDecoration(
-          color: Color(MyColors.bg03),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color(MyColors.bg01))
-        ),
+            color: Color(MyColors.bg03),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Color(MyColors.bg01))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(Icons.auto_graph,color: Color(MyColors.bg01), size: 40,),
-                  ),
-                  Text(raporAdi!, style: TextStyle(
+            Row(
+              children: [
+                Icon(
+                  Icons.auto_graph,
+                  color: Color(MyColors.bg01),
+                  size: 30,
+                ),
+                Text(
+                  raporAdi!,
+                  style: TextStyle(
                     color: Color(MyColors.bg01),
                     fontSize: 15,
-                  ),),
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                children: [
-                  Icon(Icons.star_border_purple500_sharp, color: Color(MyColors.bg01),size: 30,),
-                  Icon(Icons.navigate_next, color: Color(MyColors.bg01),size: 30,),
-                ],
-              ),
+            Row(
+              children: [
+                Icon(
+                  Icons.star_border_purple500_sharp,
+                  color: Color(MyColors.bg01),
+                  size: 30,
+                ),
+                Icon(
+                  Icons.navigate_next,
+                  color: Color(MyColors.bg01),
+                  size: 30,
+                ),
+              ],
             ),
-
-
           ],
         ),
       ),

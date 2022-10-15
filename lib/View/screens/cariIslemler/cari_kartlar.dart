@@ -1,5 +1,6 @@
 import 'package:dinamik_otomasyon/Model/cariler.dart';
 import 'package:dinamik_otomasyon/Services/Providers/all_providers.dart';
+import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../styles/colors.dart';
@@ -11,13 +12,11 @@ class CariKartlar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var _cariListe = ref.watch(carilerProvider);
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+      padding: context.paddingDefault,
       child: SingleChildScrollView(
         child: Container(
-          height: h * 0.75,
+          height: context.dynamicHeight * 0.75,
           width: double.infinity,
           child: _cariListe.when(
             data: (data) {
@@ -37,20 +36,20 @@ class CariKartlar extends ConsumerWidget {
                         );
                       },
                       child: Container(
-                        margin: const EdgeInsets.all(5),
+                        margin: context.paddingDefault,
                         child: Card(
                           elevation: 4,
                           color: Color(MyColors.bg),
                           margin: EdgeInsets.zero,
                           child: Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: context.paddingDefault,
                             child: Row(
                               children: [
                                 CircleAvatar(
                                   backgroundColor: Color(MyColors.bg01),
                                 ),
                                 SizedBox(
-                                  width: w * 0.03,
+                                  width: context.dynamicWidth * 0.03,
                                 ),
                                 Expanded(
                                   flex: 3,
@@ -69,7 +68,7 @@ class CariKartlar extends ConsumerWidget {
                                         maxLines: 2,
                                       ),
                                       SizedBox(
-                                        height: h * 0.01,
+                                        height: context.dynamicHeight * 0.01,
                                       ),
                                       Text(
                                         cariListe[index].cariKodu,

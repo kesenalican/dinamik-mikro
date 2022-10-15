@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../Model/cariler.dart';
+import '../../../../constants/constant.dart';
 import '../../../styles/colors.dart';
 
 class CariGenelTab extends ConsumerWidget {
@@ -13,27 +14,36 @@ class CariGenelTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
         children: [
-          DetaySatir(hangiOzellik: "Cari Kodu", urunBilgi: cariList.cariKodu),
           DetaySatir(
-              hangiOzellik: "Cari Ünvanı", urunBilgi: cariList.cariUnvani1),
+              hangiOzellik: Constants.CARI_KODU, urunBilgi: cariList.cariKodu),
           DetaySatir(
-              hangiOzellik: "Vergi Daire", urunBilgi: cariList.cariVDaireAdi),
+              hangiOzellik: Constants.CARI_UNVANI,
+              urunBilgi: cariList.cariUnvani1),
           DetaySatir(
-              hangiOzellik: "Vergi/TCK No", urunBilgi: cariList.cariVDaireNo),
+              hangiOzellik: Constants.VERGI_DAIRE,
+              urunBilgi: cariList.cariVDaireAdi),
           DetaySatir(
-              hangiOzellik: "Bakiye",
-              urunBilgi:cariList.cariBakiye == 0 ?  cariList.cariBakiye.ceil().toString(): cariList.cariBakiye.toString()+ " TL"),
-          DetaySatir(hangiOzellik: "E-Fatura", urunBilgi: "cariList.efatura"),
-          DetaySatir(hangiOzellik: "Temsilci", urunBilgi: "cariList.temsilci"),
-          DetaySatir(hangiOzellik: "Grup", urunBilgi: "cariList.grup"),
-          DetaySatir(hangiOzellik: "Sektör", urunBilgi: "cariList.sektor"),
-          DetaySatir(hangiOzellik: "Bölge", urunBilgi: "cariList.bolge"),
-          DetaySatir(hangiOzellik: "E-Mail", urunBilgi: cariList.cariEmail),
+              hangiOzellik: Constants.VERGINO,
+              urunBilgi: cariList.cariVDaireNo),
+          DetaySatir(
+              hangiOzellik: Constants.BAKIYE,
+              urunBilgi: cariList.cariBakiye == 0
+                  ? cariList.cariBakiye.ceil().toString()
+                  : cariList.cariBakiye.toString() + " TL"),
+          DetaySatir(
+              hangiOzellik: Constants.EFATURA, urunBilgi: "cariList.efatura"),
+          DetaySatir(
+              hangiOzellik: Constants.TEMSILCI, urunBilgi: "cariList.temsilci"),
+          DetaySatir(hangiOzellik: Constants.GRUP, urunBilgi: "cariList.grup"),
+          DetaySatir(
+              hangiOzellik: Constants.SEKTOR, urunBilgi: "cariList.sektor"),
+          DetaySatir(
+              hangiOzellik: Constants.BOLGE, urunBilgi: "cariList.bolge"),
+          DetaySatir(
+              hangiOzellik: Constants.EMAIL, urunBilgi: cariList.cariEmail),
         ],
       ),
     );
