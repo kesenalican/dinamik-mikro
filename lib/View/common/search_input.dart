@@ -1,7 +1,6 @@
-import 'package:dinamik_otomasyon/extensions/extensions.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/constant.dart';
+import '../../core/base/state/base_state.dart';
+import '../../core/constants/constant.dart';
 import '../styles/colors.dart';
 
 class SearchInput extends StatefulWidget {
@@ -12,18 +11,19 @@ class SearchInput extends StatefulWidget {
   @override
   State<SearchInput> createState() => _SearchInputState();
 }
-class _SearchInputState extends State<SearchInput> {
+class _SearchInputState extends BaseState<SearchInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: context.paddingDefault,
+      margin: paddingHorizontal*0.6,
+      padding:paddingDefault*0.2,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Color(MyColors.bg),
         borderRadius: BorderRadius.circular(5),
         border: Border.all(color: Color(MyColors.bg01),),
       ),
-      padding:context.paddingDefault,
+
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -32,7 +32,7 @@ class _SearchInputState extends State<SearchInput> {
             color: Color(MyColors.purple02),
           ),
            SizedBox(
-            width: context.dynamicWidth*0.02,
+            width: dynamicWidth(0.02),
           ),
           Expanded(
             child: TextField(

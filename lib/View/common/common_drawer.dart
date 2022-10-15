@@ -1,12 +1,12 @@
-import 'package:dinamik_otomasyon/View/screens/faturaIslemleri/satisFaturasi/satis_faturasi.dart';
-import 'package:dinamik_otomasyon/View/screens/stokIslemleri/stok_listele.dart';
-import 'package:dinamik_otomasyon/extensions/extensions.dart';
+import 'package:dinamik_otomasyon/view/screens/faturaIslemleri/satisFaturasi/satis_faturasi.dart';
+import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
+import 'package:dinamik_otomasyon/view/screens/authenticate/login/view/login.dart';
+import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/cari_listele.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_listele.dart';
 import 'package:flutter/material.dart';
-import '../../constants/constant.dart';
-import '../screens/cariIslemler/cari_listele.dart';
-import '../screens/login.dart';
+import '../../core/constants/constant.dart';
 import '../screens/module_card.dart';
-import '../screens/settings.dart';
+import '../screens/ayarlar/view/settings.dart';
 import '../styles/colors.dart';
 import 'menu_components.dart';
 

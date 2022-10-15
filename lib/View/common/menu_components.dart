@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../constants/constant.dart';
+import '../../core/constants/constant.dart';
 
 List dataList = [
   {
