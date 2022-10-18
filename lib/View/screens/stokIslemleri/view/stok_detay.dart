@@ -77,7 +77,9 @@ class _StokDetayState extends State<StokDetay> {
               stokModel: widget.stokModel,
             ),
             // RaporlarTab
-            const RaporlarTab(),
+            RaporlarTab(
+              stokModel: widget.stokModel,
+            ),
             const Icon(Icons.directions_bike),
           ],
         ),

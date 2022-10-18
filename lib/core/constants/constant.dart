@@ -88,4 +88,8 @@ class Constants {
   static const String SATISI_YAPILMAYAN_URUNLER = "Satışı Yapılmayan Ürünler";
   static const String EN_COK_SATILAN_URUNLER = "En Çok Satılan Ürünler";
   static const String EN_COK_ALINAN_URUNLER = "En Çok Alınan Ürünler";
+
+// STOK DETAY => RAPORLAR  => URUN HANGİ DEPODA
+  static const String STOK_KODU = "Stok Kodu";
+  static const String STOK_ISIM = "Stok İsim";
 }

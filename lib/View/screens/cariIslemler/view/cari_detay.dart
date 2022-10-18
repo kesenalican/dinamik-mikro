@@ -73,7 +73,9 @@ class CariDetay extends StatelessWidget {
             //Islemler Tab
             CariIslemlerTab(),
             //Bakiye İslemleri
-            CariBakiyeTab(),
+            CariBakiyeTab(
+              cariModel: cariList,
+            ),
             CariIletisimTab(
               cariler: cariList,
             ),

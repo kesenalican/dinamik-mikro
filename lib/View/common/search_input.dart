@@ -11,19 +11,18 @@ class SearchInput extends StatefulWidget {
   @override
   State<SearchInput> createState() => _SearchInputState();
 }
+
 class _SearchInputState extends BaseState<SearchInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: paddingHorizontal*0.6,
-      padding:paddingDefault*0.2,
-      width: double.infinity,
       decoration: BoxDecoration(
         color: Color(MyColors.bg),
         borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: Color(MyColors.bg01),),
+        border: Border.all(
+          color: Color(MyColors.bg01),
+        ),
       ),
-
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -31,7 +30,7 @@ class _SearchInputState extends BaseState<SearchInput> {
             Icons.search,
             color: Color(MyColors.purple02),
           ),
-           SizedBox(
+          SizedBox(
             width: dynamicWidth(0.02),
           ),
           Expanded(

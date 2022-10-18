@@ -1,10 +1,14 @@
 import 'package:dinamik_otomasyon/View/styles/colors.dart';
 import 'package:dinamik_otomasyon/core/base/state/base_state.dart';
 import 'package:dinamik_otomasyon/core/constants/constant.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/reports/urun_hangi_depoda.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RaporlarTab extends StatefulWidget {
-  const RaporlarTab({Key? key}) : super(key: key);
+  final Stoklar stokModel;
+  const RaporlarTab({Key? key, required this.stokModel}) : super(key: key);
 
   @override
   State<RaporlarTab> createState() => _RaporlarTabState();
@@ -17,8 +21,7 @@ class _RaporlarTabState extends BaseState<RaporlarTab> {
       child: Container(
         height: dynamicHeight(1),
         margin: EdgeInsets.symmetric(
-            horizontal:dynamicWidth(0.02),
-            vertical: dynamicHeight(0.001)),
+            horizontal: dynamicWidth(0.02), vertical: dynamicHeight(0.001)),
         child: Column(
           children: [
             Expanded(
@@ -33,7 +36,11 @@ class _RaporlarTabState extends BaseState<RaporlarTab> {
                     raporAdi: Constants.DEPODA_HANGI_URUNLER_MEVCUT)),
             Expanded(
                 flex: 1,
-                child: raporListe(raporAdi: Constants.URUN_HANGI_DEPODA)),
+                child: raporListe(
+                    raporAdi: Constants.URUN_HANGI_DEPODA,
+                    hangiSayfa: UrunHangiDepoda(
+                      stokModel: widget.stokModel,
+                    ))),
             Expanded(
                 flex: 1,
                 child:
@@ -50,11 +57,14 @@ class _RaporlarTabState extends BaseState<RaporlarTab> {
     );
   }
 
-  Widget raporListe({String? raporAdi}) {
+  Widget raporListe({String? raporAdi, Widget? hangiSayfa}) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => hangiSayfa!));
+      },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal:dynamicWidth(0.02)),
+        padding: EdgeInsets.symmetric(horizontal: dynamicWidth(0.02)),
         margin: paddingDefault,
         decoration: BoxDecoration(
             color: Color(MyColors.bg03),

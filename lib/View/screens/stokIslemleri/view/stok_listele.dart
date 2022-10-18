@@ -1,11 +1,14 @@
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_karti.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/base/state/base_state.dart';
 import '../../../common/search_input.dart';
 import '../../../styles/colors.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class StokListele extends StatefulWidget {
   StokListele({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class StokListele extends StatefulWidget {
 }
 
 class _StokListeleState extends BaseState<StokListele> {
+  String barcode = 'UnKnown';
   @override
   Widget build(BuildContext context) {
     List<Stoklar> searchList = [];
@@ -33,7 +37,18 @@ class _StokListeleState extends BaseState<StokListele> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SearchInput(),
+            Row(
+              children: [
+                SizedBox(
+                  width: dynamicWidth(0.03),
+                ),
+                const Expanded(flex: 6, child: SearchInput()),
+                const Expanded(
+                  flex: 1,
+                  child: OpenBarcod(),
+                ),
+              ],
+            ),
             buildListeleButton(),
             const StokKartlari(),
           ],
