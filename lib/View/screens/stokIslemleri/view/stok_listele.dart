@@ -1,4 +1,3 @@
-
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_karti.dart';
 import 'package:flutter/material.dart';
 import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
@@ -28,12 +27,13 @@ class _StokListeleState extends BaseState<StokListele> {
         }
       });
     }
+
     return Scaffold(
       appBar: CommonAppbar(whichPage: Constants.STOK_KARTLARI),
       body: SingleChildScrollView(
         child: Column(
           children: [
-              const SearchInput(),
+            const SearchInput(),
             buildListeleButton(),
             const StokKartlari(),
           ],
@@ -46,8 +46,9 @@ class _StokListeleState extends BaseState<StokListele> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        margin:EdgeInsets.symmetric(horizontal:dynamicWidth(0.03),vertical: dynamicHeight(0.01)),
-        padding:paddingDefault,
+        margin: EdgeInsets.symmetric(
+            horizontal: dynamicWidth(0.03), vertical: dynamicHeight(0.01)),
+        padding: paddingDefault,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Color(MyColors.bg01),

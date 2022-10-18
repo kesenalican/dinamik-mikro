@@ -5,7 +5,7 @@ import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/tabs/stok_rapo
 import 'package:flutter/material.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../styles/colors.dart';
-import 'stok_genel.dart';
+import 'tabs/stok_genel_tab.dart';
 
 class StokDetay extends StatefulWidget {
   final Stoklar stokModel;
@@ -73,7 +73,9 @@ class _StokDetayState extends State<StokDetay> {
               stokModel: widget.stokModel,
             ),
             //Depo Tab
-            const DepoTab(),
+            DepoTab(
+              stokModel: widget.stokModel,
+            ),
             // RaporlarTab
             const RaporlarTab(),
             const Icon(Icons.directions_bike),

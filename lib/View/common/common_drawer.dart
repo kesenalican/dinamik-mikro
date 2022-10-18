@@ -8,7 +8,7 @@ import '../../core/constants/constant.dart';
 import '../screens/module_card.dart';
 import '../screens/ayarlar/view/settings.dart';
 import '../styles/colors.dart';
-import 'menu_components.dart';
+import '../../core/components/menu_components.dart';
 
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
           Container(
             height: context.dynamicHeight * 0.15,
             child: UserAccountsDrawerHeader(
-              accountName:  const Text(Constants.DINAMIK_OTOMASYON),
+              accountName: const Text(Constants.DINAMIK_OTOMASYON),
               accountEmail: null,
               decoration: BoxDecoration(
                 color: Color(MyColors.bg01),

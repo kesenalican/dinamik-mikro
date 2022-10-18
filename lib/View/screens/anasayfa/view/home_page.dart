@@ -9,13 +9,12 @@ import 'package:dinamik_otomasyon/view/screens/module_card.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_listele.dart';
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatefulWidget {
   String? sirketAdi;
 
   HomePage({
     Key? key,
-    this.sirketAdi,
+    required this.sirketAdi,
   }) : super(key: key);
 
   @override
@@ -29,23 +28,15 @@ class _HomePageState extends BaseState<HomePage> {
       appBar: CommonAppbar(whichPage: Constants.ANASAYFA),
       drawer: const DrawerMenu(),
       body: Container(
-        padding:  EdgeInsets.symmetric(horizontal: dynamicWidth(0.02)),
+        padding: EdgeInsets.symmetric(horizontal: dynamicWidth(0.02)),
         child: ListView(
           children: [
             //SizedBox(height:dynamicHeight(0.01)),
             const SearchInput(),
             SizedBox(
-              height:dynamicHeight(0.02),
+              height: dynamicHeight(0.02),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  Constants.KARTLAR,
-                  style: theme.textTheme.headline6,
-                ),
-              ],
-            ),
+            _buildKartlarText(),
             SizedBox(
               height: dynamicHeight(0.02),
             ),
@@ -98,7 +89,16 @@ class _HomePageState extends BaseState<HomePage> {
       ),
     );
   }
+
+  Row _buildKartlarText() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          Constants.KARTLAR,
+          style: theme.textTheme.headline6,
+        ),
+      ],
+    );
+  }
 }
-
-
-

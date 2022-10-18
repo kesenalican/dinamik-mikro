@@ -1,78 +1,32 @@
-import 'package:dinamik_otomasyon/core/base/state/base_state.dart';
+import 'package:dinamik_otomasyon/Model/depo_model.dart';
+import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/view/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dinamik_otomasyon/core/constants/constant.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DepoTab extends StatefulWidget {
-  const DepoTab({Key? key}) : super(key: key);
+import '../../model/stoklar_model.dart';
+
+class DepoTab extends ConsumerWidget {
+  final Stoklar stokModel;
+  const DepoTab({Key? key, required this.stokModel}) : super(key: key);
 
   @override
-  State<DepoTab> createState() => _DepoTabState();
-}
-
-class _DepoTabState extends BaseState<DepoTab> {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          buildStokDepoDagilimText(context),
-          buildUrunDagilim(),
-          //veriyi çekince ayır
-          Container(
-            width: double.infinity,
-            margin: paddingDefault,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Color(MyColors.bg01),
-              ),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: paddingDefault,
-                      child: const Text(
-                        "No: 1",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: paddingDefault,
-                      child: const Text(
-                        "Depo Adı: Merkez depo",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: paddingDefault,
-                      child: const Text("Miktar: -461,99"),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      children: [
+        _buildStokDepoDagilimText(context.dynamicHeight, context.dynamicWidth),
+        _buildUrunDagilim(context.dynamicHeight, context.dynamicWidth),
+        //veriyi çekince ayır
+        _buildDepo2(context.dynamicHeight, context.dynamicWidth),
+      ],
     );
   }
 
-  Container buildUrunDagilim() {
+  _buildDepo2(double dynamicHeight, double width) {
     return Container(
       width: double.infinity,
-      margin: paddingDefault,
+      margin: EdgeInsets.all(dynamicHeight * 0.02),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(10),
@@ -85,18 +39,18 @@ class _DepoTabState extends BaseState<DepoTab> {
           Row(
             children: [
               Padding(
-                padding: paddingDefault,
+                padding: EdgeInsets.all(dynamicHeight * 0.01),
                 child: const Text(
-                  "No: -1",
+                  "No: 1",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Padding(
-                padding: paddingDefault,
+                padding: EdgeInsets.all(dynamicHeight * 0.01),
                 child: const Text(
-                  "${Constants.DEPO_ADI}Tüm Depolar",
+                  "Depo Adı: Merkez depo",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -107,8 +61,8 @@ class _DepoTabState extends BaseState<DepoTab> {
           Row(
             children: [
               Padding(
-                padding: paddingDefault,
-                child: const Text("${Constants.MIKTAR} -461,99"),
+                padding: EdgeInsets.all(dynamicHeight * 0.01),
+                child: const Text("Miktar: -461,99"),
               ),
             ],
           ),
@@ -117,10 +71,60 @@ class _DepoTabState extends BaseState<DepoTab> {
     );
   }
 
-  Container buildStokDepoDagilimText(BuildContext context) {
+  _buildUrunDagilim(double dynamicHeight, double width) {
     return Container(
-      margin: paddingTextField,
-      padding:paddingDefault,
+      width: double.infinity,
+      margin: EdgeInsets.all(dynamicHeight * 0.02),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Color(MyColors.bg01),
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(dynamicHeight * 0.01),
+                child: const Text(
+                  "No: 1",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(dynamicHeight * 0.01),
+                child: const Text(
+                  "${Constants.DEPO_ADI} Merkez",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(dynamicHeight * 0.01),
+                child: Text(
+                    //DEPODAKİ TOPLAM ÜRÜN
+                    "${Constants.MIKTAR} ${stokModel.merkez.ceil()} ${stokModel.stokBirim1}"),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildStokDepoDagilimText(double dynamicHeight, double width) {
+    return Container(
+      margin: EdgeInsets.all(dynamicHeight * 0.01),
+      padding: EdgeInsets.all(dynamicHeight * 0.01),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Color(MyColors.bg02),

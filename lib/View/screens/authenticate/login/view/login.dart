@@ -1,8 +1,8 @@
 import 'package:dinamik_otomasyon/View/styles/colors.dart';
 import 'package:dinamik_otomasyon/core/base/state/base_state.dart';
 import 'package:dinamik_otomasyon/core/constants/constant.dart';
+import 'package:dinamik_otomasyon/view/screens/anasayfa/view/home_page.dart';
 import 'package:flutter/material.dart';
-import '../../../anasayfa/view/home_page.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -50,29 +50,29 @@ class _LoginState extends BaseState<Login> {
               const Spacer(
                 flex: 2,
               ),
-              Expanded(flex: 4, child: Logo()),
+              Expanded(flex: 4, child: _buildLogo()),
               const Spacer(),
               Expanded(
                 flex: 1,
-                child: inputField(Constants.SIRKET_ADI, Icons.account_balance,
-                    sirketController!),
+                child: _buildInputField(Constants.SIRKET_ADI,
+                    Icons.account_balance, sirketController!),
               ),
               Expanded(
                 flex: 1,
-                child: inputField(Constants.KULLANICI_ADI,
+                child: _buildInputField(Constants.KULLANICI_ADI,
                     Icons.supervised_user_circle, kullaniciController!),
               ),
               Expanded(
                 flex: 1,
-                child: inputField(
+                child: _buildInputField(
                     Constants.SIFRE, Icons.password, sifreController!),
               ),
               Expanded(
-                child: buildRememberMe(),
+                child: _buildRememberMe(),
               ),
               Expanded(
                 flex: 1,
-                child: loginButton(Constants.GIRIS_YAP),
+                child: _buildLoginButton(Constants.GIRIS_YAP),
               ),
               const Spacer(flex: 2),
             ],
@@ -82,7 +82,7 @@ class _LoginState extends BaseState<Login> {
     );
   }
 
-  Row buildRememberMe() {
+  _buildRememberMe() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -107,7 +107,7 @@ class _LoginState extends BaseState<Login> {
     );
   }
 
-  Widget Logo() {
+  _buildLogo() {
     return Container(
       child: Image(
         image: const AssetImage(Constants.LOGO),
@@ -117,10 +117,11 @@ class _LoginState extends BaseState<Login> {
     );
   }
 
-  Widget inputField(
+  _buildInputField(
       String hint, IconData iconData, TextEditingController controller) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: dynamicWidth(0.03), vertical:dynamicHeight(0.01)),
+      padding: EdgeInsets.symmetric(
+          horizontal: dynamicWidth(0.03), vertical: dynamicHeight(0.01)),
       child: Form(
         child: Material(
           elevation: 8,
@@ -147,7 +148,7 @@ class _LoginState extends BaseState<Login> {
     );
   }
 
-  Widget loginButton(String title) {
+  _buildLoginButton(String title) {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
@@ -160,7 +161,8 @@ class _LoginState extends BaseState<Login> {
         );
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: dynamicWidth(0.15), vertical:dynamicHeight(0.02)),
+        padding: EdgeInsets.symmetric(
+            horizontal: dynamicWidth(0.15), vertical: dynamicHeight(0.02)),
         shape: const StadiumBorder(),
         primary: Color(MyColors.header01),
         elevation: 8,

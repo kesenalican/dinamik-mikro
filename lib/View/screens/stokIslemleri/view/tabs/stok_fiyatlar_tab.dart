@@ -23,7 +23,7 @@ class FiyatlarTab extends ConsumerWidget {
               buildUrunFiyat(context),
             ],
           ),
-           SizedBox(
+          SizedBox(
             height: context.dynamicHeight * 0.01,
           ),
           Column(
@@ -39,127 +39,125 @@ class FiyatlarTab extends ConsumerWidget {
 
   GestureDetector buildSonAlisFiyatButton(BuildContext context) {
     return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (context) => SonSatisFiyatlari(
-                              satisMi: false,
-                            )));
-              },
-              child: Container(
-                margin:
-                    context.paddingTextField,
-                padding: context.paddingDefault,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(MyColors.bg01),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(
-                  child: Text(
-                    Constants.SON_ALIS_FIYATLARI,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ),
-            );
+      onTap: () {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => SonSatisFiyatlari(
+                      satisMi: false,
+                    )));
+      },
+      child: Container(
+        margin: context.paddingTextField,
+        padding: context.paddingDefault,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Color(MyColors.bg01),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: const Center(
+          child: Text(
+            Constants.SON_ALIS_FIYATLARI,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   GestureDetector buildSonSatisFiyatButton(BuildContext context) {
     return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (context) => SonSatisFiyatlari(
-                              satisMi: true,
-                            )));
-              },
-              child: Container(
-                margin:
-                    context.paddingTextField,
-                padding: context.paddingDefault,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(MyColors.bg01),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(
-                  child: Text(
-                    Constants.SON_SATIS_FIYATLARI,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ),
-            );
+      onTap: () {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => SonSatisFiyatlari(
+                      satisMi: true,
+                    )));
+      },
+      child: Container(
+        margin: context.paddingTextField,
+        padding: context.paddingDefault,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Color(MyColors.bg01),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: const Center(
+          child: Text(
+            Constants.SON_SATIS_FIYATLARI,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Container buildUrunFiyat(BuildContext context) {
     return Container(
-              width: double.infinity,
-              margin: context.paddingTextField,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Color(MyColors.bg01),
+      width: double.infinity,
+      margin: context.paddingTextField,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Color(MyColors.bg01),
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: context.paddingDefault,
+                child: const Text(
+                  "Liste No: 1",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: context.paddingDefault,
-                        child: const Text(
-                          "Liste No: 1",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: context.paddingDefault,
-                        child: const Text(
-                          Constants.SATIS_FIYATI,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+              Padding(
+                padding: context.paddingDefault,
+                child: const Text(
+                  Constants.SATIS_FIYATI,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(Constants.FIYAT +
-                            stokModel.stokFiyat.toString() +
-                            Constants.TURK_LIRASI),
-                      ),
-                       Padding(
-                        padding: context.paddingDefault,
-                        child: Text("  Adet Fiyatı"),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            );
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(context.dynamicHeight * 0.01),
+                child: Text(Constants.FIYAT +
+                    stokModel.stokFiyat.toString() +
+                    Constants.TURK_LIRASI),
+              ),
+              Padding(
+                padding: context.paddingDefault,
+                child: Text("  1 Adet Fiyatı"),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Container buildTanimliFiyatlarText(BuildContext context) {
     return Container(
-      margin: context.paddingTextField,
+      margin: context.paddingDefault,
       padding: context.paddingDefault,
       width: double.infinity,
       decoration: BoxDecoration(

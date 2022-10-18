@@ -1,4 +1,3 @@
-
 import 'package:dinamik_otomasyon/core/constants/constant.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/model/cariler.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/tabs/cari_bakiye.dart';
@@ -7,18 +6,14 @@ import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/tabs/cari_ileti
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/tabs/cari_islemler.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/tabs/cari_raporlar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../styles/colors.dart';
-import '../../stokIslemleri/view/stok_genel.dart';
+import '../../stokIslemleri/view/tabs/stok_genel_tab.dart';
 
-class CariDetay extends StatefulWidget {
+class CariDetay extends StatelessWidget {
   Cariler cariList;
-   CariDetay({Key? key, required this.cariList}) : super(key: key);
+  CariDetay({Key? key, required this.cariList}) : super(key: key);
 
-  @override
-  State<CariDetay> createState() => _CariDetayState();
-}
-
-class _CariDetayState extends State<CariDetay> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -47,7 +42,7 @@ class _CariDetayState extends State<CariDetay> {
               ),
               Tab(
                 icon: Icon(Icons.price_change_rounded),
-                text:Constants.ISLEMLER,
+                text: Constants.ISLEMLER,
               ),
               Tab(
                 icon: Icon(Icons.currency_exchange),
@@ -56,7 +51,6 @@ class _CariDetayState extends State<CariDetay> {
               Tab(
                 icon: Icon(Icons.call),
                 text: Constants.ILETISIM,
-
               ),
               Tab(
                 icon: Icon(Icons.report_gmailerrorred),
@@ -69,11 +63,11 @@ class _CariDetayState extends State<CariDetay> {
             ],
           ),
         ),
-        body:  TabBarView(
+        body: TabBarView(
           children: [
             //Genel Tab
             CariGenelTab(
-              cariList: widget.cariList,
+              cariList: cariList,
             ),
             //Icon(Icons.directions_bike),
             //Islemler Tab
@@ -81,7 +75,7 @@ class _CariDetayState extends State<CariDetay> {
             //Bakiye İslemleri
             CariBakiyeTab(),
             CariIletisimTab(
-              cariler: widget.cariList,
+              cariler: cariList,
             ),
             CariRaporlarTab(),
             Icon(Icons.directions_bike),

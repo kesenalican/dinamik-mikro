@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Constants {
   static const String ANASAYFA = "Anasayfa";
   static const String SIRKET_ADI = "Şirket Adı";

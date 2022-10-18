@@ -1,24 +1,23 @@
 import 'package:dinamik_otomasyon/service/Providers/all_providers.dart';
 import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
-import 'package:dinamik_otomasyon/view/screens/cariIslemler/model/cariler.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../styles/colors.dart';
 import 'cari_detay.dart';
 
-class CariKartlar extends ConsumerWidget {
+class CariKartlar extends HookConsumerWidget {
   const CariKartlar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var _cariListe = ref.watch(carilerProvider);
+    var cariListe = ref.watch(carilerProvider);
     return Padding(
       padding: context.paddingDefault,
       child: SingleChildScrollView(
         child: Container(
           height: context.dynamicHeight * 0.75,
           width: double.infinity,
-          child: _cariListe.when(
+          child: cariListe.when(
             data: (data) {
               return ListView.builder(
                   itemCount: 100,
