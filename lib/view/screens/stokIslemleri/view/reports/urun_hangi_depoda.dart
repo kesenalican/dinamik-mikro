@@ -17,11 +17,6 @@ class UrunHangiDepoda extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stokKodu1 = useTextEditingController(text: stokModel.stokKodu);
-    final stokKodu2 = useTextEditingController(text: stokModel.stokKodu);
-    final stokKoduText = useState(stokModel.stokKodu);
-    final stokCinsi = useState(stokModel.stokIsim);
-
     return Scaffold(
       appBar: CommonAppbar(
         whichPage: 'Rapor Parametreleri',
@@ -30,8 +25,7 @@ class UrunHangiDepoda extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildStokFilter(context, stokKodu1),
-            _buildStokFilter(context, stokKodu1),
+            _buildStokFilter(context, stokModel.stokKodu),
             SizedBox(
               height: context.dynamicHeight * 0.05,
             ),
@@ -85,20 +79,19 @@ class UrunHangiDepoda extends HookConsumerWidget {
     );
   }
 
-  Container _buildStokFilter(
-      BuildContext context, TextEditingController stokKodu1) {
+  Container _buildStokFilter(BuildContext context, String stokKodu) {
     return Container(
-      margin: context.paddingDefault * 1.2,
+      margin: context.paddingDefault * 1.1,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
           width: 1,
-          color: Color(MyColors.bg01),
+          color: Color(MyColors.bg),
         ),
       ),
       child: Card(
         elevation: 10,
         color: Color(MyColors.bg),
-        margin: EdgeInsets.zero,
         child: Row(
           children: [
             SizedBox(
@@ -109,14 +102,16 @@ class UrunHangiDepoda extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     Constants.STOK_KODU,
+                    style: purpleTxtStyle,
                   ),
                   SizedBox(
-                    height: context.dynamicHeight * 0.07,
+                    height: context.dynamicHeight * 0.04,
                   ),
-                  const Text(
+                  Text(
                     Constants.STOK_ISIM,
+                    style: purpleTxtStyle,
                   ),
                 ],
               ),
@@ -126,33 +121,41 @@ class UrunHangiDepoda extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     ":",
+                    style: purpleTxtStyle,
                   ),
                   SizedBox(
-                    height: context.dynamicHeight * 0.07,
+                    height: context.dynamicHeight * 0.04,
                   ),
-                  const Text(":"),
+                  Text(
+                    ":",
+                    style: purpleTxtStyle,
+                  ),
                 ],
               ),
             ),
             Expanded(
               flex: 3,
-              child: Column(
-                children: [
-                  TextField(
-                    controller: stokKodu1,
-                    cursorColor: Color(MyColors.bg01),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: context.dynamicHeight * 0.00001),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.dynamicWidth * 0.01,
+                    vertical: context.dynamicHeight * 0.01),
+                child: Column(
+                  children: [
+                    Text(
+                      stokKodu,
+                      style: purpleTxtStyle,
                     ),
-                  ),
-                  SizedBox(
-                    height: context.dynamicHeight * 0.05,
-                  ),
-                  Text(stokModel.stokIsim),
-                ],
+                    SizedBox(
+                      height: context.dynamicHeight * 0.05,
+                    ),
+                    Text(
+                      stokModel.stokIsim,
+                      style: purpleTxtStyle,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

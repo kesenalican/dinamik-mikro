@@ -18,6 +18,7 @@ class Stoklar {
     required this.stokAnaGrup,
     required this.stokSektor,
     required this.stokBirim1,
+    required this.stokBirim2,
     required this.stokBirim3,
     required this.stokBirim3Katsayi,
     required this.stokReyon,
@@ -34,6 +35,7 @@ class Stoklar {
   final String stokAnaGrup;
   final String stokSektor;
   final String stokBirim1;
+  final String stokBirim2;
   final String stokBirim3;
   final double stokBirim3Katsayi;
   final String stokReyon;
@@ -50,6 +52,7 @@ class Stoklar {
         stokAnaGrup: json["StokAnaGrup"],
         stokSektor: json["StokSektor"],
         stokBirim1: json["StokBirim1"],
+        stokBirim2: json["StokBirim2"],
         stokBirim3: json["StokBirim3"],
         stokBirim3Katsayi: json["StokBirim3_katsayi"],
         stokReyon: json["StokReyon"],
@@ -67,6 +70,7 @@ class Stoklar {
         "StokAnaGrup": stokAnaGrup,
         "StokSektor": stokSektor,
         "StokBirim1": stokBirim1,
+        "StokBirim2": stokBirim2,
         "StokBirim3": stokBirim3,
         "StokBirim3_katsayi": stokBirim3Katsayi,
         "StokReyon": stokReyon,

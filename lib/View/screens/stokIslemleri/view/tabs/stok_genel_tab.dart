@@ -35,7 +35,9 @@ class StokGenel extends ConsumerWidget {
                 hangiOzellik: Constants.BIRIM,
                 urunBilgi:
                     "${stokModel.stokBirim1} (1 ${stokModel.stokBirim1}) : ${stokModel.stokBirim3Katsayi.toInt()} adet"),
-            DetaySatir(hangiOzellik: Constants.BIRIM_2, urunBilgi: "birim-2"),
+            DetaySatir(
+                hangiOzellik: Constants.BIRIM_2,
+                urunBilgi: stokModel.stokBirim2),
             DetaySatir(
                 hangiOzellik: Constants.BIRIM_3,
                 urunBilgi: stokModel.stokBirim3),
