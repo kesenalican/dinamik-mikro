@@ -31,3 +31,18 @@ Future<void> scanBarcode() async {
     return;
   }
 }
+
+class StokViewModel extends HookWidget {
+  const StokViewModel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+
+  buildCircularProgress() {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+}

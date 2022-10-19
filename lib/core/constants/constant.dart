@@ -93,3 +93,7 @@ class Constants {
   static const String STOK_KODU = "Stok Kodu";
   static const String STOK_ISIM = "Stok İsim";
 }
+
+class ConstantProvider {
+  static const String BASE_URL = "http://192.168.5.24:5239/api/";
+}

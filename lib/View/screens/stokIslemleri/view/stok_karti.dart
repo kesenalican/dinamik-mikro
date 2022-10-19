@@ -2,7 +2,6 @@ import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_detay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import '../../../styles/colors.dart';
@@ -12,8 +11,13 @@ class StokKartlari extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<void> _handleRefresh() async {
-      return await Future.delayed(Duration(seconds: 2));
+    Future<void> handleRefresh() async {
+      return await Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          return ref.read(stoklarProvider);
+        },
+      );
     }
 
     var liste = ref.watch(stoklarProvider);
@@ -21,7 +25,7 @@ class StokKartlari extends HookConsumerWidget {
       padding: EdgeInsets.all(context.dynamicHeight * 0.001),
       child: SingleChildScrollView(
         child: LiquidPullToRefresh(
-          onRefresh: _handleRefresh,
+          onRefresh: handleRefresh,
           color: Color(
             MyColors.bg01,
           ),
@@ -140,8 +144,10 @@ class StokKartlari extends HookConsumerWidget {
                   child: Text("Hata çıktı ${err.toString()}"),
                 );
               },
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
+              loading: () => Center(
+                child: CircularProgressIndicator(
+                  color: Color(MyColors.bg01),
+                ),
               ),
             ),
           ),

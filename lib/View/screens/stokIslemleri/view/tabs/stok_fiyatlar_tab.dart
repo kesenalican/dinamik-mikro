@@ -1,6 +1,7 @@
 import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
-import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/son_satis_fiyatlari.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/tabs/son_satis_fiyatlari.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/tabs/son_alis_fiyatlari.dart';
 import 'package:dinamik_otomasyon/view/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,8 @@ class FiyatlarTab extends ConsumerWidget {
         Navigator.push(
             context,
             CupertinoPageRoute(
-                builder: (context) => SonSatisFiyatlari(
-                      satisMi: false,
+                builder: (context) => SonAlisFiyatlari(
+                      stokModel: stokModel,
                     )));
       },
       child: Container(
@@ -76,7 +77,7 @@ class FiyatlarTab extends ConsumerWidget {
             context,
             CupertinoPageRoute(
                 builder: (context) => SonSatisFiyatlari(
-                      satisMi: true,
+                      stokModel: stokModel,
                     )));
       },
       child: Container(

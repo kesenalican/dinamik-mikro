@@ -1,15 +1,10 @@
 import 'package:dinamik_otomasyon/core/base/service/base_provider.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stok_alis_fiyatlari.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-int currentPage = 1;
 //#region Stoklar koda göre sıralama
-final stoklarProvider =
-    FutureProvider<List<Stoklar>>((ref, {bool isRefresh = false}) async {
-  if (isRefresh) {
-    currentPage = 1;
-  }
-
+final stoklarProvider = FutureProvider<List<Stoklar>>((ref) async {
   final dio = ref.watch(httpClientProvider);
   final result = await dio.get("Stoklar");
   List<Map<String, dynamic>> mapData = List.from(result.data);
@@ -17,3 +12,44 @@ final stoklarProvider =
   return stoklist;
 });
 //#endregion
+
+//#region Stok Son Alış Fiyatları
+final stokAlisFiyatlariProvider =
+    FutureProvider.family<List<StokAlisFiyatlari>, String>(
+        (ref, stokKodu) async {
+  final dio = ref.watch(httpClientProvider);
+  final result =
+      await dio.post("StokAlisFiyatlari", data: {'stokKodu': stokKodu});
+  if (result.statusCode == 200) {
+    List<Map<String, dynamic>> mapData = List.from(result.data);
+    List<StokAlisFiyatlari> stokAlisFiyatlari =
+        mapData.map((e) => StokAlisFiyatlari.fromMap(e)).toList();
+    return stokAlisFiyatlari;
+  } else {
+    return Future.delayed(
+      const Duration(milliseconds: 2000),
+    );
+  }
+});
+//#endregion
+
+//#region Stok Son Alış Fiyatları
+final stokSatisFiyatlariProvider =
+    FutureProvider.family<List<StokAlisFiyatlari>, String>(
+        (ref, stokKodu) async {
+  final dio = ref.watch(httpClientProvider);
+  final result =
+      await dio.post("StokSatisFiyatlari", data: {'stokKodu': stokKodu});
+  if (result.statusCode == 200) {
+    List<Map<String, dynamic>> mapData = List.from(result.data);
+    List<StokAlisFiyatlari> stokAlisFiyatlari =
+        mapData.map((e) => StokAlisFiyatlari.fromMap(e)).toList();
+    return stokAlisFiyatlari;
+  } else {
+    return Future.delayed(
+      const Duration(milliseconds: 2000),
+    );
+  }
+});
+//#endregion
+
