@@ -12,8 +12,13 @@ class CariKartlar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<void> _handleRefresh() async {
-      return await Future.delayed(Duration(seconds: 2));
+    Future<void> handleRefresh() async {
+      return await Future.delayed(
+        Duration(seconds: 2),
+        () {
+          return ref.read(carilerProvider);
+        },
+      );
     }
 
     var cariListe = ref.watch(carilerProvider);
@@ -21,7 +26,7 @@ class CariKartlar extends HookConsumerWidget {
       padding: context.paddingDefault,
       child: SingleChildScrollView(
         child: LiquidPullToRefresh(
-          onRefresh: _handleRefresh,
+          onRefresh: handleRefresh,
           color: Color(
             MyColors.bg01,
           ),
@@ -107,8 +112,10 @@ class CariKartlar extends HookConsumerWidget {
                   child: Text("Hata çıktı ${err.toString()}"),
                 );
               },
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
+              loading: () => Center(
+                child: CircularProgressIndicator(
+                  color: Color(MyColors.bg01),
+                ),
               ),
             ),
           ),

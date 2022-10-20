@@ -1,4 +1,6 @@
+import 'package:dinamik_otomasyon/view/screens/cariIslemler/viewmodel/cari_view_model.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_karti.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_deneme.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dinamik_otomasyon/View/common/common_appbar.dart';
@@ -42,14 +44,14 @@ class _StokListeleState extends BaseState<StokListele> {
                 SizedBox(
                   width: dynamicWidth(0.03),
                 ),
-                const Expanded(flex: 6, child: SearchInput()),
+                Expanded(flex: 6, child: _buildSearchInput()),
                 const Expanded(
                   flex: 1,
                   child: OpenBarcod(),
                 ),
               ],
             ),
-            buildListeleButton(),
+            _buildListeleButton(),
             const StokKartlari(),
           ],
         ),
@@ -57,7 +59,44 @@ class _StokListeleState extends BaseState<StokListele> {
     );
   }
 
-  Widget buildListeleButton() {
+  _buildSearchInput() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Color(MyColors.bg),
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(
+          color: Color(MyColors.bg01),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.search,
+            color: Color(MyColors.purple02),
+          ),
+          SizedBox(
+            width: dynamicWidth(0.02),
+          ),
+          Expanded(
+            child: TextField(
+              onTap: () {},
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: Constants.ARA,
+                hintStyle: TextStyle(
+                    fontSize: 13,
+                    color: Color(MyColors.purple01),
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildListeleButton() {
     return GestureDetector(
       onTap: () {},
       child: Container(

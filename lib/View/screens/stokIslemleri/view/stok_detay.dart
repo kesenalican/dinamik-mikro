@@ -57,7 +57,7 @@ class _StokDetayState extends State<StokDetay> {
               ),
               Tab(
                 icon: Icon(Icons.auto_graph),
-                text: Constants.RAPORLAR,
+                text: Constants.GRAFIKLER,
               ),
             ],
           ),

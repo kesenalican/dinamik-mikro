@@ -1,7 +1,13 @@
 import 'package:dinamik_otomasyon/core/base/service/base_provider.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stok_alis_fiyatlari.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final stoklarStateProvider =
+    StateNotifierProvider<StoklarNotifier, List<Stoklar>>((ref) {
+  return StoklarNotifier();
+});
 
 //#region Stoklar koda göre sıralama
 final stoklarProvider = FutureProvider<List<Stoklar>>((ref) async {

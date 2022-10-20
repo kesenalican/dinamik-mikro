@@ -92,6 +92,12 @@ class Constants {
 // STOK DETAY => RAPORLAR  => URUN HANGİ DEPODA
   static const String STOK_KODU = "Stok Kodu";
   static const String STOK_ISIM = "Stok İsim";
+// ERROR TEXTS
+  static const String OK = "Ok";
+  static const String HATA_BASLIK = "Haberleşme Hatası";
+  static const String HATA_ICERIK = "Sunucuya bağlanırken bir hata oluştu";
+  static const String SATIS_FATURASI_BULUNAMADI =
+      "Son 6 aya ait satış faturası bulunamadı...";
 }
 
 class ConstantProvider {
