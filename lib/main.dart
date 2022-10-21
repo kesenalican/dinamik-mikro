@@ -1,5 +1,6 @@
 import 'package:dinamik_otomasyon/view/screens/authenticate/login/view/login.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/reports/en_cok_satilan_urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dinamik_otomasyon/core/constants/constant.dart';

@@ -1,6 +1,8 @@
 import 'package:dinamik_otomasyon/core/base/service/base_provider.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/en_cok_satilan_urunler.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stok_alis_fiyatlari.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/reports/en_cok_satilan_urunler.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -59,3 +61,26 @@ final stokSatisFiyatlariProvider =
 });
 //#endregion
 
+//#region Stok Son Alış Fiyatları
+final enCokSatilanUrunlerProvider =
+    FutureProvider.family<List<EnCokSatilanUrunlerModel>, String>(
+        (ref, baslangicTarihi) async {
+  final dio = ref.watch(httpClientProvider);
+  final result = await dio
+      .post("EnCokSatilanUrunler", data: {'baslangic': baslangicTarihi});
+  if (result.statusCode == 200) {
+    List<Map<String, dynamic>> mapData = List.from(result.data);
+    List<EnCokSatilanUrunlerModel> enCokSatilanUrunler =
+        mapData.map((e) => EnCokSatilanUrunlerModel.fromMap(e)).toList();
+    return enCokSatilanUrunler;
+  } else {
+    return Future.delayed(
+      const Duration(milliseconds: 2000),
+    );
+  }
+});
+//#endregion
+
+//Constructor'a index göndermemek için listview'ın ilk child'ı olarak
+//ProviderScope kullanıp stok indeximi diğer sayfada kolayca çağıracağım.
+final currentStokIndex = StateProvider<int>((ref) => 0);

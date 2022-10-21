@@ -215,7 +215,7 @@ class Menu {
     if (json['subMenu'] != null) {
       subMenu!.clear();
       json['subMenu'].forEach((v) {
-        subMenu?.add(new Menu.fromJson(v));
+        subMenu?.add(Menu.fromJson(v));
       });
     }
   }

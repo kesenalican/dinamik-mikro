@@ -8,7 +8,6 @@ import 'package:dinamik_otomasyon/view/styles/colors.dart';
 import 'package:dinamik_otomasyon/view/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class SonAlisFiyatlari extends ConsumerWidget {

@@ -136,7 +136,7 @@ class StokKartlari extends HookConsumerWidget {
                       ),
                     );
                   },
-                  itemCount: 20,
+                  itemCount: liste.length,
                 );
               },
               error: (err, stack) {

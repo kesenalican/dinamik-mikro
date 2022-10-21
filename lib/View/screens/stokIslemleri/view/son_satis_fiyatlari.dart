@@ -18,8 +18,6 @@ class SonSatisFiyatlari extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     var alisFiyatlari =
         ref.watch(stokSatisFiyatlariProvider(stokModel.stokKodu));
     return Scaffold(
@@ -70,7 +68,6 @@ class SonSatisFiyatlari extends ConsumerWidget {
                             (liste[index].brutTutar).toStringAsFixed(2));
                         double netFiyat = double.parse(
                             (liste[index].netBirimFiyati).toStringAsFixed(2));
-                        debugPrint("KAÇ TANE ELEMAN VAR == ${liste.length}");
                         return Column(
                           children: [
                             fiyatList(context,

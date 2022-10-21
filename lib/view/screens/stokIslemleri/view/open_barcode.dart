@@ -34,9 +34,5 @@ Future<void> scanBarcode() async {
   }
 }
 
-final stokProvider = Provider(((ref) {
-  final result = ref.read(stoklarProvider);
-  return result;
-}));
 
 //#endregion

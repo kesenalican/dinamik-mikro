@@ -2,6 +2,7 @@ import 'package:dinamik_otomasyon/View/styles/colors.dart';
 import 'package:dinamik_otomasyon/core/base/state/base_state.dart';
 import 'package:dinamik_otomasyon/core/constants/constant.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/reports/en_cok_satilan_urunler.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/reports/urun_hangi_depoda.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,6 @@ class _RaporlarTabState extends BaseState<RaporlarTab> {
           children: [
             Expanded(
                 flex: 1,
-                child: raporListe(raporAdi: Constants.STOK_BAKIYE_LISTESI)),
-            Expanded(
-                flex: 1,
-                child: raporListe(raporAdi: Constants.STOK_ENVANTER_RAPORU)),
-            Expanded(
-                flex: 1,
                 child: raporListe(
                     raporAdi: Constants.DEPODA_HANGI_URUNLER_MEVCUT)),
             Expanded(
@@ -47,7 +42,16 @@ class _RaporlarTabState extends BaseState<RaporlarTab> {
                     raporListe(raporAdi: Constants.SATISI_YAPILMAYAN_URUNLER)),
             Expanded(
                 flex: 1,
-                child: raporListe(raporAdi: Constants.EN_COK_SATILAN_URUNLER)),
+                child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) =>
+                                  const EnCokSatilanUrunler()));
+                    },
+                    child: raporListe(
+                        raporAdi: Constants.EN_COK_SATILAN_URUNLER))),
             Expanded(
                 flex: 1,
                 child: raporListe(raporAdi: Constants.EN_COK_ALINAN_URUNLER)),
