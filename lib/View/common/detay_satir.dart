@@ -17,7 +17,7 @@ class _DetaySatirState extends BaseState<DetaySatir> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:paddingDefault,
+      padding: paddingDefault,
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [

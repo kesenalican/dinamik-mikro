@@ -11,16 +11,19 @@ class StokKartlari extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    int currentPage = 1;
     Future<void> handleRefresh() async {
       return await Future.delayed(
         const Duration(seconds: 2),
         () {
-          return ref.read(stoklarProvider);
+          //return ref.read(stoklarProvider);
         },
       );
     }
 
-    var liste = ref.watch(stoklarProvider);
+    var liste = ref.watch(stoklarProvider(
+      const {'offset': 1, 'count': 1},
+    ));
     return Padding(
       padding: EdgeInsets.all(context.dynamicHeight * 0.001),
       child: SingleChildScrollView(

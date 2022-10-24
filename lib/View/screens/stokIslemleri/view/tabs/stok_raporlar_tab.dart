@@ -42,16 +42,9 @@ class _RaporlarTabState extends BaseState<RaporlarTab> {
                     raporListe(raporAdi: Constants.SATISI_YAPILMAYAN_URUNLER)),
             Expanded(
                 flex: 1,
-                child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) =>
-                                  const EnCokSatilanUrunler()));
-                    },
-                    child: raporListe(
-                        raporAdi: Constants.EN_COK_SATILAN_URUNLER))),
+                child: raporListe(
+                    raporAdi: Constants.EN_COK_SATILAN_URUNLER,
+                    hangiSayfa: const EnCokSatilanUrunler())),
             Expanded(
                 flex: 1,
                 child: raporListe(raporAdi: Constants.EN_COK_ALINAN_URUNLER)),

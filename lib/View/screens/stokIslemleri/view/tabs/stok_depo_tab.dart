@@ -112,7 +112,7 @@ class DepoTab extends ConsumerWidget {
                 padding: EdgeInsets.all(dynamicHeight * 0.01),
                 child: Text(
                     //DEPODAKİ TOPLAM ÜRÜN
-                    "${Constants.MIKTAR} ${stokModel.merkez.ceil()} ${stokModel.stokBirim1}"),
+                    "${Constants.MIKTAR} {stokModel.merkez.ceil()} ${stokModel.stokBirim1}"),
               ),
             ],
           ),

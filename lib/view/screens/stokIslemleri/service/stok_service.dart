@@ -1,4 +1,5 @@
 import 'package:dinamik_otomasyon/core/base/service/base_provider.dart';
+import 'package:dinamik_otomasyon/service/Providers/api_status.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/en_cok_satilan_urunler.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stok_alis_fiyatlari.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
@@ -6,18 +7,38 @@ import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/reports/en_cok
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final stoklarStateProvider =
-    StateNotifierProvider<StoklarNotifier, List<Stoklar>>((ref) {
-  return StoklarNotifier();
-});
+class StokService {
+  static Future<Object> getStok() async {
+    final stoklarProvider =
+        StateNotifierProvider.family<List<Stoklar>, Map<String, int>>(
+            (ref, map) async {
+      final dio = ref.watch(httpClientProvider);
+      final result = await dio.get("Stoklar", queryParameters: map);
+      List<Map<String, dynamic>> mapData = List.from(result.data);
+      List<Stoklar> stoklist = mapData.map((e) => Stoklar.fromMap(e)).toList();
+      return stoklist;
+    });
+    return stoklarProvider;
+  }
+}
+
+// final stoklarStateProvider =
+//     StateNotifierProvider<StoklarNotifier, List<Stoklar>>((ref) {
+//   return StoklarNotifier();
+// });
 
 //#region Stoklar koda göre sıralama
-final stoklarProvider = FutureProvider<List<Stoklar>>((ref) async {
+final stoklarProvider = FutureProvider.autoDispose
+    .family<List<Stoklar>, Map<String, int>>((ref, map) async {
   final dio = ref.watch(httpClientProvider);
-  final result = await dio.get("Stoklar");
-  List<Map<String, dynamic>> mapData = List.from(result.data);
-  List<Stoklar> stoklist = mapData.map((e) => Stoklar.fromMap(e)).toList();
-  return stoklist;
+  final result = await dio.get("Stoklar", queryParameters: map);
+  if (result.statusCode == 200) {
+    List<Map<String, dynamic>> mapData = List.from(result.data);
+    List<Stoklar> stoklist = mapData.map((e) => Stoklar.fromMap(e)).toList();
+    return stoklist;
+  } else {
+    return Future.delayed(const Duration(seconds: 1));
+  }
 });
 //#endregion
 
@@ -83,4 +104,6 @@ final enCokSatilanUrunlerProvider =
 
 //Constructor'a index göndermemek için listview'ın ilk child'ı olarak
 //ProviderScope kullanıp stok indeximi diğer sayfada kolayca çağıracağım.
+
+/// OLMADI!
 final currentStokIndex = StateProvider<int>((ref) => 0);

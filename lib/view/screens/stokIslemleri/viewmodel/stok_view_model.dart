@@ -1,28 +1,57 @@
-import 'package:dinamik_otomasyon/core/constants/constant.dart';
+import 'package:dinamik_otomasyon/service/Providers/api_status.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:dio/dio.dart';
 
-class StoklarNotifier extends StateNotifier<List<Stoklar>> {
-  StoklarNotifier() : super([]);
+// class StokViewModel extends ChangeNotifier {
+//   bool _loading = false;
+//   List<Stoklar> _stokListModel = [];
 
-  Future<List<Stoklar>> getStoklar() async {
-    var baseUrl = ConstantProvider.BASE_URL;
-    try {
-      var response = await Dio().get("${baseUrl}Stoklar");
-      if (response.statusCode == 200) {
-        debugPrint("GELEN VERİLER === ${response.data.toString()}");
-        List<Map<String, dynamic>> mapData = List.from(response.data);
-        List<Stoklar> stoklist =
-            mapData.map((e) => Stoklar.fromMap(e)).toList();
-        return stoklist;
-      } else {
-        return Future.delayed(const Duration(milliseconds: 2000));
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    return [];
+//   bool get loading => _loading;
+//   List<Stoklar> get stokListModel => _stokListModel;
+
+//   setLoading(bool loading) async {
+//     _loading = loading;
+//     notifyListeners();
+//   }
+
+//   setStokListModel(List<Stoklar> stokModel) {
+//     _stokListModel = stokModel;
+//   }
+
+//   getStoklar() async {
+//     setLoading(true);
+//     var response = await StokService.getStok();
+//     if (response is Success) {
+//       setStokListModel(response.response as List<Stoklar>);
+//     }
+//     if (response is Failure) {
+//       setStokListModel(response.errorResponse as List<Stoklar>);
+//     }
+//     setLoading(false);
+//   }
+// }
+
+//-----------------------------------------------------------------
+
+class StokViewModel extends StateNotifier<List<Stoklar>> {
+  StokViewModel(super.state);
+
+  bool _loading = false;
+  List<Stoklar> _stokListModel = [];
+  bool get loading => _loading;
+
+  setLoading(bool loading) async {
+    _loading = loading;
+  }
+
+  setStokListModel(List<Stoklar> stoklar) {
+    _stokListModel = stoklar;
+  }
+
+  getStoklar() async {
+    final apiResult = await StokService.getStok();
+    return apiResult;
   }
 }

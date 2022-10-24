@@ -156,10 +156,7 @@ class _EnCokSatilanUrunlerState extends BaseState<EnCokSatilanUrunler> {
                 ),
               ),
             ),
-            _buildListeleButton(
-              baslangicTarihi: dateTimeBaslangic.toString(),
-              bitisTarihi: dateTimeBitis.toString(),
-            ),
+            _buildListeleButton(),
             isSelected
                 ? SingleChildScrollView(
                     child: LiquidPullToRefresh(
@@ -192,8 +189,7 @@ class _EnCokSatilanUrunlerState extends BaseState<EnCokSatilanUrunler> {
     );
   }
 
-  _buildListeleButton(
-      {required String? baslangicTarihi, required String? bitisTarihi}) {
+  _buildListeleButton() {
     return GestureDetector(
       onTap: () {
         setState(() {
