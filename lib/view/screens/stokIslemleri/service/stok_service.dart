@@ -1,37 +1,69 @@
 import 'package:dinamik_otomasyon/core/base/service/base_provider.dart';
-import 'package:dinamik_otomasyon/service/Providers/api_status.dart';
+import 'package:dinamik_otomasyon/core/constants/constant.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/en_cok_satilan_urunler.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stok_alis_fiyatlari.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
-import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/reports/en_cok_satilan_urunler.dart';
-import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// class StokService {
+//   List<Stoklar>? stokList;
+//   Future<List<Stoklar>> getStok() async {
+//     List<Stoklar> stoklist = [];
+//     final stoklar =
+//         FutureProvider.family<List<Stoklar>, int>((ref, page) async {
+//       final dio = ref.watch(httpClientProvider);
+//       final result =
+//           await dio.get("Stoklar", queryParameters: {'offset': page});
+//       List<Map<String, dynamic>> mapData = List.from(result.data);
+//       stoklist = mapData.map((e) => Stoklar.fromMap(e)).toList();
+//       return stoklist;
+//     });
+
+//     return stoklist;
+//   }
+
+//   Future<List<Stoklar>?> getStoklar(int offset) async {
+//     final result =
+//         await Dio().get("${ConstantProvider.BASE_URL}/Stoklar?offset=$offset");
+//     List<Map<String, dynamic>> mapData = List.from(result.data);
+//     stokList = mapData.map((e) => Stoklar.fromMap(e)).toList();
+//     return stokList;
+//   }
+// }
+// final deneme = FutureProvider.family<List<Stoklar>, String>((ref, query) {
+//   return StokService().getUserListforSearch(query);
+// });
+
 class StokService {
-  static Future<Object> getStok() async {
-    final stoklarProvider =
-        StateNotifierProvider.family<List<Stoklar>, Map<String, int>>(
-            (ref, map) async {
-      final dio = ref.watch(httpClientProvider);
-      final result = await dio.get("Stoklar", queryParameters: map);
-      List<Map<String, dynamic>> mapData = List.from(result.data);
-      List<Stoklar> stoklist = mapData.map((e) => Stoklar.fromMap(e)).toList();
-      return stoklist;
-    });
-    return stoklarProvider;
+  var data = [];
+  List<Stoklar> results = [];
+  String fetchUrl = "${ConstantProvider.BASE_URL}Stoklar/search";
+  Future<List<Stoklar>> getUserListforSearch(int pageCount) async {
+    var response =
+        await Dio().get(fetchUrl, queryParameters: {'ofsett': pageCount});
+    try {
+      if (response.statusCode == 200) {
+        List<Map<String, dynamic>> mapData = List.from(response.data);
+        results = mapData.map((e) => Stoklar.fromMap(e)).toList();
+      } else {
+        print("api error");
+      }
+    } on Exception catch (e) {
+      print("api error ${e.toString()}");
+    }
+    return results;
   }
 }
 
-// final stoklarStateProvider =
-//     StateNotifierProvider<StoklarNotifier, List<Stoklar>>((ref) {
-//   return StoklarNotifier();
-// });
+
 
 //#region Stoklar koda göre sıralama
-final stoklarProvider = FutureProvider.autoDispose
-    .family<List<Stoklar>, Map<String, int>>((ref, map) async {
+final stoklarProvider =
+    FutureProvider.family<List<Stoklar>, int>((ref, pageCount) async {
   final dio = ref.watch(httpClientProvider);
-  final result = await dio.get("Stoklar", queryParameters: map);
+  final result =
+      await dio.get("Stoklar", queryParameters: {'offset': pageCount});
   if (result.statusCode == 200) {
     List<Map<String, dynamic>> mapData = List.from(result.data);
     List<Stoklar> stoklist = mapData.map((e) => Stoklar.fromMap(e)).toList();

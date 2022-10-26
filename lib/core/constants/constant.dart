@@ -98,6 +98,8 @@ class Constants {
   static const String HATA_ICERIK = "Sunucuya bağlanırken bir hata oluştu";
   static const String SATIS_FATURASI_BULUNAMADI =
       "Son 6 aya ait satış faturası bulunamadı...";
+
+  static const int PAGE_COUNT = 20;
 }
 
 class ConstantProvider {

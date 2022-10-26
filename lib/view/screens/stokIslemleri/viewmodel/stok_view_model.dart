@@ -1,57 +1,22 @@
-import 'package:dinamik_otomasyon/service/Providers/api_status.dart';
-import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 
-// class StokViewModel extends ChangeNotifier {
-//   bool _loading = false;
-//   List<Stoklar> _stokListModel = [];
+import '../model/stoklar_model.dart';
 
-//   bool get loading => _loading;
-//   List<Stoklar> get stokListModel => _stokListModel;
+final stokProvider = Provider<StokService>((ref) => StokService());
 
-//   setLoading(bool loading) async {
-//     _loading = loading;
-//     notifyListeners();
-//   }
-
-//   setStokListModel(List<Stoklar> stokModel) {
-//     _stokListModel = stokModel;
-//   }
-
-//   getStoklar() async {
-//     setLoading(true);
-//     var response = await StokService.getStok();
-//     if (response is Success) {
-//       setStokListModel(response.response as List<Stoklar>);
-//     }
-//     if (response is Failure) {
-//       setStokListModel(response.errorResponse as List<Stoklar>);
-//     }
-//     setLoading(false);
-//   }
-// }
-
-//-----------------------------------------------------------------
+final stokDataProvider2 =
+    FutureProvider.family<List<Stoklar>, int>((ref, offset) async {
+  return ref.watch(stokProvider).getUserListforSearch(offset);
+});
 
 class StokViewModel extends StateNotifier<List<Stoklar>> {
-  StokViewModel(super.state);
-
-  bool _loading = false;
-  List<Stoklar> _stokListModel = [];
-  bool get loading => _loading;
-
-  setLoading(bool loading) async {
-    _loading = loading;
-  }
-
-  setStokListModel(List<Stoklar> stoklar) {
-    _stokListModel = stoklar;
-  }
-
-  getStoklar() async {
-    final apiResult = await StokService.getStok();
-    return apiResult;
+  StokViewModel(super.state, this._stokService);
+  final StokService _stokService;
+  Future<List<Stoklar>> getStoklar(int offset) async {
+    var userList = await _stokService.getUserListforSearch(offset);
+    return userList;
   }
 }

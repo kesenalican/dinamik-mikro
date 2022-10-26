@@ -6,7 +6,7 @@ import 'package:dinamik_otomasyon/view/common/common_drawer.dart';
 import 'package:dinamik_otomasyon/view/common/module_card_button.dart';
 import 'package:dinamik_otomasyon/view/common/search_input.dart';
 import 'package:dinamik_otomasyon/view/screens/module_card.dart';
-import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_listele.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_karti.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -42,8 +42,10 @@ class _HomePageState extends BaseState<HomePage> {
             ),
             ModuleCardButton(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => StokListele()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const StokKartlari()));
               },
               cardName: Modules[0],
               iconData: const Icon(Icons.attach_money_rounded),

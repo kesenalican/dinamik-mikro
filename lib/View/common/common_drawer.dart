@@ -2,7 +2,7 @@ import 'package:dinamik_otomasyon/view/screens/faturaIslemleri/satisFaturasi/sat
 import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/view/screens/authenticate/login/view/login.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/cari_listele.dart';
-import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_listele.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_karti.dart';
 import 'package:flutter/material.dart';
 import '../../core/constants/constant.dart';
 import '../screens/module_card.dart';
@@ -77,7 +77,7 @@ Widget _buildList(Menu list) {
                       ? () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => StokListele()))
+                              builder: (context) => StokKartlari()))
                       : list.name == Constants.CARI_ISLEMLER
                           ? () => Navigator.push(
                               context,
