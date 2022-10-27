@@ -11,8 +11,8 @@ import '../../../styles/colors.dart';
 import '../../stokIslemleri/view/tabs/stok_genel_tab.dart';
 
 class CariDetay extends StatelessWidget {
-  Cariler cariList;
-  CariDetay({Key? key, required this.cariList}) : super(key: key);
+  final Cariler cariList;
+  const CariDetay({Key? key, required this.cariList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
