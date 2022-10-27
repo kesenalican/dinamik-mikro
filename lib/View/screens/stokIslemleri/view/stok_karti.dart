@@ -5,6 +5,8 @@ import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/open_barcode.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_detay.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
+import 'package:dinamik_otomasyon/view/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../styles/colors.dart';
@@ -17,13 +19,15 @@ class StokKartlari extends ConsumerStatefulWidget {
 }
 
 class _StokKartlariState extends ConsumerState<StokKartlari> {
+  TextEditingController searchQuery = TextEditingController();
   int currentPage = 0;
   ScrollController scrollController = ScrollController();
   bool hasMore = true;
   bool refresh = false;
+  bool isActive = false;
   List<Stoklar> emptyList = [];
   List<Stoklar> fullList = [];
-  List<Stoklar> filteredList = [];
+  List<Stoklar> searchedEmptyList = [];
   void handleNext() {
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
@@ -42,22 +46,20 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
   @override
   void dispose() {
     scrollController.dispose();
+    searchQuery.dispose();
+    isActive = false;
     super.dispose();
   }
 
-  void _runFilter(String searchKeyword) {
-    List<Stoklar> results = [];
-    if (searchKeyword.isEmpty) {
-      results = emptyList;
-    } else {
-      results = emptyList
-          .where((stok) =>
-              stok.stokKodu.toLowerCase().contains(searchKeyword.toLowerCase()))
-          .toList();
-    }
+  _runFilter(String searchQuery) async {
     setState(() {
-      filteredList = results;
+      fullList = fullList
+          .where((value) =>
+              value.stokKodu.toLowerCase().contains(searchQuery.toLowerCase()))
+          .toList();
+      searchedEmptyList = fullList;
     });
+    return searchedEmptyList;
   }
 
   @override
@@ -66,6 +68,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
       return await Future.delayed(
         const Duration(seconds: 2),
         () {
+          ref.refresh(stoklarProvider(currentPage));
           refresh = false;
         },
       );
@@ -120,20 +123,23 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
 
   SizedBox _buildStokKarti() {
     return SizedBox(
-      height: context.dynamicHeight * 0.73,
-      width: double.infinity,
+      height: context.dynamicHeight * 0.75,
       child: ListView.builder(
+        shrinkWrap: true,
+        physics: const ScrollPhysics(),
         controller: scrollController,
         itemBuilder: (context, index) {
           if (index < fullList.length) {
             return InkWell(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => StokDetay(
-                              stokModel: fullList[index],
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StokDetay(
+                      stokModel: fullList[index],
+                    ),
+                  ),
+                );
               },
               child: Container(
                 margin: const EdgeInsets.all(5),
@@ -156,7 +162,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
                           width: context.dynamicWidth * 0.10,
                         ),
                         //FİYAT
-                        _buildAdetVeFiyat(index),
+                        _buildAdetVeFiyat(index)
                       ],
                     ),
                   ),
@@ -266,7 +272,6 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
           ),
           Expanded(
             child: TextField(
-              onTap: () {},
               onChanged: (value) => _runFilter(value),
               decoration: InputDecoration(
                 border: InputBorder.none,

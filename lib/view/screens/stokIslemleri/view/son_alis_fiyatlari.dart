@@ -81,7 +81,7 @@ class SonAlisFiyatlari extends ConsumerWidget {
                   }
                 },
                 error: (err, stack) {
-                  showAlertDialog(
+                  return showAlertDialog(
                     context: context,
                     hataBaslik: Constants.HATA_BASLIK,
                     hataIcerik: err.toString(),

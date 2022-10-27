@@ -39,13 +39,14 @@ class StokService {
   var data = [];
   List<Stoklar> results = [];
   String fetchUrl = "${ConstantProvider.BASE_URL}Stoklar/search";
-  Future<List<Stoklar>> getUserListforSearch(int pageCount) async {
-    var response =
-        await Dio().get(fetchUrl, queryParameters: {'ofsett': pageCount});
+  Future<List<Stoklar>> getUserListforSearch(String query) async {
+    var response = await Dio().get(fetchUrl);
     try {
       if (response.statusCode == 200) {
         List<Map<String, dynamic>> mapData = List.from(response.data);
         results = mapData.map((e) => Stoklar.fromMap(e)).toList();
+        results.where((stok) =>
+            stok.stokKodu.toLowerCase().contains(stok.stokKodu.toLowerCase()));
       } else {
         print("api error");
       }
@@ -56,7 +57,19 @@ class StokService {
   }
 }
 
-
+// //#region Stoklar koda göre sıralama
+// final allStoklarProvider = FutureProvider<List<Stoklar>>((ref) async {
+//   final dio = ref.watch(httpClientProvider);
+//   final result = await dio.get("Stoklar/search");
+//   if (result.statusCode == 200) {
+//     List<Map<String, dynamic>> mapData = List.from(result.data);
+//     List<Stoklar> stoklist = mapData.map((e) => Stoklar.fromMap(e)).toList();
+//     return stoklist;
+//   } else {
+//     return Future.delayed(const Duration(seconds: 1));
+//   }
+// });
+// //#endregion
 
 //#region Stoklar koda göre sıralama
 final stoklarProvider =
