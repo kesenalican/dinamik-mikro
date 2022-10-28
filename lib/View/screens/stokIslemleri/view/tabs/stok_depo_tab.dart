@@ -1,4 +1,3 @@
-import 'package:dinamik_otomasyon/Model/depo_model.dart';
 import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/view/styles/colors.dart';
 import 'package:flutter/material.dart';

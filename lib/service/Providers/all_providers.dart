@@ -1,4 +1,5 @@
 import 'package:dinamik_otomasyon/Model/depo_model.dart';
+import 'package:dinamik_otomasyon/Model/kasa_model.dart';
 import 'package:dinamik_otomasyon/core/base/service/base_provider.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/model/cariler.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
@@ -12,5 +13,14 @@ final depolarProvider = FutureProvider<List<Depo>>((ref) async {
   List<Map<String, dynamic>> mapData = List.from(result.data);
   List<Depo> cariList = mapData.map((e) => Depo.fromMap(e)).toList();
   return cariList;
+});
+//#endregion
+//#region Depo
+final kasalarProvider = FutureProvider<List<KasaModel>>((ref) async {
+  final dio = ref.watch(httpClientProvider);
+  final result = await dio.get("Kasalar");
+  List<Map<String, dynamic>> mapData = List.from(result.data);
+  List<KasaModel> kasaList = mapData.map((e) => KasaModel.fromMap(e)).toList();
+  return kasaList;
 });
 //#endregion

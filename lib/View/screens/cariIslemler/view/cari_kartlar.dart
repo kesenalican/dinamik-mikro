@@ -3,6 +3,7 @@ import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/view/common/common_appbar.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/model/cariler.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/service/cari_services.dart';
+import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/yeniCariKart/yeni_cari_kart.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/viewmodel/cari_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -19,13 +20,14 @@ class CariKartlar extends ConsumerStatefulWidget {
 }
 
 class _CariKartlarState extends ConsumerState<CariKartlar> {
+  TextEditingController searchQuery = TextEditingController();
   int currentPage = 0;
   ScrollController scrollController = ScrollController();
   bool hasMore = true;
   bool refresh = false;
   List<Cariler> emptyList = [];
   List<Cariler> fullList = [];
-  List<Cariler> filteredList = [];
+  List<Cariler> searchedEmptyList = [];
 
   void handleNext() {
     scrollController.addListener(() async {
@@ -48,27 +50,27 @@ class _CariKartlarState extends ConsumerState<CariKartlar> {
     super.dispose();
   }
 
-  void _runFilter(String searchKeyword) {
-    List<Cariler> results = [];
-    if (searchKeyword.isEmpty) {
-      results = emptyList;
-    } else {
-      results = emptyList
-          .where((cari) =>
-              cari.cariKodu.toLowerCase().contains(searchKeyword.toLowerCase()))
-          .toList();
-    }
-    setState(() {
-      filteredList = results;
+  _runFilter(String searchKeyword) {
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        fullList = fullList
+            .where((value) => value.cariKodu
+                .toLowerCase()
+                .contains(searchKeyword.toLowerCase()))
+            .toList();
+        searchedEmptyList = fullList;
+      });
     });
+    return searchedEmptyList;
   }
 
   @override
   Widget build(BuildContext context) {
     Future<void> handleRefresh() async {
       return await Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () {
+          ref.refresh(carilerProvider(currentPage));
           refresh = false;
         },
       );
@@ -76,6 +78,15 @@ class _CariKartlarState extends ConsumerState<CariKartlar> {
 
     var cariListe = ref.watch(carilerProvider(currentPage));
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const YeniCariKart())),
+        backgroundColor: Color(MyColors.bg01),
+        child: const Icon(
+          Icons.add,
+          size: 15,
+        ),
+      ),
       resizeToAvoidBottomInset: true,
       appBar: CommonAppbar(
         whichPage: "Cariler",

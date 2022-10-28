@@ -5,8 +5,6 @@ import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/open_barcode.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_detay.dart';
-import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
-import 'package:dinamik_otomasyon/view/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../styles/colors.dart';
@@ -52,13 +50,20 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
   }
 
   _runFilter(String searchQuery) async {
-    setState(() {
-      fullList = fullList
-          .where((value) =>
-              value.stokKodu.toLowerCase().contains(searchQuery.toLowerCase()))
-          .toList();
-      searchedEmptyList = fullList;
-    });
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        setState(() {
+          fullList = fullList
+              .where((value) => value.stokKodu
+                  .toLowerCase()
+                  .contains(searchQuery.toLowerCase()))
+              .toList();
+          searchedEmptyList = fullList;
+        });
+      },
+    );
+
     return searchedEmptyList;
   }
 

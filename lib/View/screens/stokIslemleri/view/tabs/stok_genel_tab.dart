@@ -8,7 +8,7 @@ import 'package:dinamik_otomasyon/core/constants/constant.dart';
 class StokGenel extends ConsumerWidget {
   final Stoklar stokModel;
 
-  StokGenel({
+  const StokGenel({
     Key? key,
     required this.stokModel,
   }) : super(key: key);
