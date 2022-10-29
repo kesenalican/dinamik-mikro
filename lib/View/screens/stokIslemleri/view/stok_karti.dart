@@ -5,6 +5,7 @@ import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/open_barcode.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/stok_detay.dart';
+import 'package:dinamik_otomasyon/view/screens/stokIslemleri/viewmodel/stok_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../styles/colors.dart';
@@ -19,17 +20,16 @@ class StokKartlari extends ConsumerStatefulWidget {
 class _StokKartlariState extends ConsumerState<StokKartlari> {
   TextEditingController searchQuery = TextEditingController();
   int currentPage = 0;
-  ScrollController scrollController = ScrollController();
+  ScrollController? scrollController;
   bool hasMore = true;
-  bool refresh = false;
-  bool isActive = false;
   List<Stoklar> emptyList = [];
   List<Stoklar> fullList = [];
   List<Stoklar> searchedEmptyList = [];
+
   void handleNext() {
-    scrollController.addListener(() async {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
+    scrollController!.addListener(() async {
+      if (scrollController!.position.maxScrollExtent ==
+          scrollController!.position.pixels) {
         ref.watch(stoklarProvider(currentPage = currentPage + 20));
       }
     });
@@ -38,14 +38,14 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
   @override
   void initState() {
     super.initState();
+    scrollController = ScrollController();
     handleNext();
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     searchQuery.dispose();
-    isActive = false;
     super.dispose();
   }
 
@@ -74,7 +74,6 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
         const Duration(seconds: 2),
         () {
           ref.refresh(stoklarProvider(currentPage));
-          refresh = false;
         },
       );
     }
@@ -102,7 +101,8 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
             ),
             _buildListeleButton(),
             liste.when(data: (data) {
-              currentPage == 0 ? ref.read(stoklarProvider(0)) : SizedBox;
+              //currentPage == 0 ? ref.read(stoklarProvider(0)) : SizedBox;
+              print("Current Page değerim== $currentPage");
               emptyList = data.map((e) => e).toList();
               fullList.addAll(emptyList);
               return RefreshIndicator(
@@ -130,8 +130,6 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
     return SizedBox(
       height: context.dynamicHeight * 0.75,
       child: ListView.builder(
-        shrinkWrap: true,
-        physics: const ScrollPhysics(),
         controller: scrollController,
         itemBuilder: (context, index) {
           if (index < fullList.length) {

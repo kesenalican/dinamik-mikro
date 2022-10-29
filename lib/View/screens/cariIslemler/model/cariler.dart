@@ -8,7 +8,7 @@ class Cariler {
   Cariler({
     required this.cariKodu,
     required this.cariUnvani1,
-    required this.cariUnvani2,
+    this.cariUnvani2,
     required this.cariVDaireAdi,
     required this.cariVDaireNo,
     required this.cariEmail,
@@ -18,7 +18,7 @@ class Cariler {
 
   final String cariKodu;
   final String cariUnvani1;
-  final String cariUnvani2;
+  final String? cariUnvani2;
   final String cariVDaireAdi;
   final String cariVDaireNo;
   final String cariEmail;

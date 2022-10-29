@@ -1,5 +1,6 @@
 import 'package:dinamik_otomasyon/view/common/common_appbar.dart';
 import 'package:dinamik_otomasyon/view/common/common_input_border.dart';
+import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/yeniCariKart/common_textfield.dart';
 import 'package:dinamik_otomasyon/view/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -38,107 +39,98 @@ class YeniCariKart extends HookWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: cariKoduController,
-              field: "Cari Kodu",
+              field: "CariKodu",
               icon: Icons.code,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: cariUnvanController,
               field: "Cari Ünvanı",
               icon: Icons.person,
               textInputType: TextInputType.name,
             ),
+            CommonTextField(
+              controller: verginoController,
+              field: "Vergi NO",
+              icon: Icons.account_balance,
+              textInputType: TextInputType.number,
+            ),
             _buildVergiNoTextField(verginoController),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: vergiDaireController,
               field: "Vergi Dairesi",
               icon: Icons.account_balance,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: yetkiliAdiController,
               field: "Yetkili Adı",
               icon: Icons.person,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: yetkiliSoyAdiController,
               field: "Yetkili Soyadı",
               icon: Icons.person,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: adres1Controller,
               field: "Adres 1",
               icon: Icons.location_city,
               textInputType: TextInputType.streetAddress,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: adres2Controller,
               field: "Adres 2",
               icon: Icons.location_city,
               textInputType: TextInputType.streetAddress,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: ilController,
               field: "İl",
               icon: Icons.map,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: ilceController,
               field: "İlçe",
               icon: Icons.maps_home_work,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: ulkeController,
               field: "Ülke",
               icon: Icons.maps_home_work_sharp,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: ulkeKoduController,
               field: "Ülke Kodu",
               icon: Icons.maps_home_work_sharp,
               textInputType: TextInputType.number,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: telefon1Controller,
               field: "Telefon 1",
               icon: Icons.phone,
               textInputType: TextInputType.phone,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: telefon2Controller,
               field: "Telefon 2",
               icon: Icons.phone,
               textInputType: TextInputType.phone,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: faxController,
               field: "Fax",
               icon: Icons.fax,
               textInputType: TextInputType.name,
             ),
-            _buildCommonTextField(
-              context,
+            CommonTextField(
               controller: mailController,
               field: "E-mail",
               icon: Icons.mail,
@@ -176,42 +168,6 @@ class YeniCariKart extends HookWidget {
                 color: Color(
                   MyColors.bg01,
                 )),
-          ),
-          enabledBorder: CommonInputBorder.border,
-          focusedBorder: CommonInputBorder.border,
-        ),
-      ),
-    );
-  }
-
-  _buildCommonTextField(context,
-      {TextEditingController? controller,
-      String? field,
-      IconData? icon,
-      TextInputType? textInputType}) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: TextFormField(
-        validator: (value) => value!.isEmpty ? "$field Boş Olamaz!" : null,
-        controller: controller,
-        keyboardType: textInputType,
-        cursorColor: Color(MyColors.bg01),
-        style: TextStyle(
-          color: Color(
-            MyColors.bg01,
-          ),
-        ),
-        decoration: InputDecoration(
-          labelText: field,
-          labelStyle: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w400,
-              color: Color(
-                MyColors.bg01,
-              )),
-          prefixIcon: Icon(
-            icon,
-            color: Color(MyColors.bg01),
           ),
           enabledBorder: CommonInputBorder.border,
           focusedBorder: CommonInputBorder.border,

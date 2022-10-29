@@ -67,34 +67,44 @@ Widget _buildList(Menu list) {
           hoverColor: Color(MyColors.bg01),
           selectedTileColor: Color(MyColors.bg01),
           textColor: Color(MyColors.bg01),
-          onTap: list.name == Constants.AYARLAR
-              ? () => Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Settings()))
-              : list.name == Constants.CIKIS
-                  ? () => Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Login()))
-                  : list.name == "Stok Kart Detay"
-                      ? () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const StokKartlari()))
-                      : list.name == Constants.CARI_ISLEMLER
-                          ? () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CariKartlar()))
-                          : list.name == "Satış Faturaları"
-                              ? () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SatisFaturasi()))
-                              : () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ScheduleTab(
-                                            cardName: list.name,
-                                          ))),
+          onTap: () {
+            switch (list.name) {
+              case Constants.AYARLAR:
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Settings()));
+                break;
+              case Constants.CIKIS:
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+                break;
+              case "Stok Kart Detay":
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const StokKartlari()));
+                break;
+              case Constants.CARI_ISLEMLER:
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CariKartlar()));
+                break;
+              case "Satış Faturaları":
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SatisFaturasi()));
+                break;
+              default:
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleTab(
+                              cardName: list.name,
+                            )));
+                break;
+            }
+          },
           leading: Icon(
             Icons.next_plan,
             color: Color(MyColors.bg01),
