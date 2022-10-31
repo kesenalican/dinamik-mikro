@@ -3,10 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../model/stoklar_model.dart';
 
-class StokViewModel {
+final stokStateNotifierProvider =
+    StateNotifierProvider<StokViewModel, List<Stoklar>>(
+        (ref) => StokViewModel());
+
+class StokViewModel extends StateNotifier<List<Stoklar>> {
   late final StokService _stokService;
-  Future<List<Stoklar>> getStoklar(String query) async {
-    var userList = await _stokService.getUserListforSearch(query);
+
+  StokViewModel() : super([]);
+  Future<List<Stoklar>> getStoklar() async {
+    var userList = await _stokService.getStokLList();
     return userList;
   }
 }

@@ -25,6 +25,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
   List<Stoklar> emptyList = [];
   List<Stoklar> fullList = [];
   List<Stoklar> searchedEmptyList = [];
+  bool searchFilter = false;
 
   void handleNext() {
     scrollController!.addListener(() async {
@@ -49,21 +50,63 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
     super.dispose();
   }
 
-  _runFilter(String searchQuery) async {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        setState(() {
-          fullList = fullList
-              .where((value) => value.stokKodu
-                  .toLowerCase()
-                  .contains(searchQuery.toLowerCase()))
-              .toList();
-          searchedEmptyList = fullList;
-        });
-      },
-    );
+  // void _runFilter(String query) {
+  //   List<Stoklar> dummySearchList = [];
+  //   dummySearchList.addAll(fullList);
+  //   if (query.isNotEmpty) {
+  //     List<Stoklar> dummyListData = [];
+  //     for (var stok in dummySearchList) {
+  //       var sorgu = stok.stokKodu.toLowerCase();
+  //       if (sorgu.contains(query)) {
+  //         dummyListData.add(stok);
+  //       }
+  //     }
+  //     setState(() {
+  //       searchedEmptyList.clear();
+  //       searchedEmptyList.addAll(dummyListData);
+  //     });
+  //     return;
+  //   } else {
+  //     setState(() {
+  //       searchedEmptyList.clear();
+  //       searchedEmptyList.addAll(fullList);
+  //     });
+  //   }
+  //   print("DUMMY LİST LENGTH" + searchedEmptyList.length.toString());
+  // }
 
+  //_runFilter(String searchQuery) async {
+  // Future.delayed(
+  //   const Duration(seconds: 2),
+  //   () {
+  //     setState(() {
+  //       searchFilter == true;
+  //       searchedEmptyList = fullList;
+  //       fullList.clear();
+  //       fullList = searchedEmptyList
+  //           .where((value) => value.stokIsim
+  //               .toLowerCase()
+  //               .contains(searchQuery.toLowerCase()))
+  //           .toList();
+  //     });
+  //   },
+  // );
+  // print("aramadan sonra fulllist == " + fullList.length.toString());
+
+  // return fullList;
+  //}
+
+  _runFilter(String searchKeyword) {
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        searchedEmptyList = fullList
+            .where((value) => value.stokKodu
+                .toLowerCase()
+                .contains(searchKeyword.toLowerCase()))
+            .toList();
+        fullList.clear();
+      });
+    });
     return searchedEmptyList;
   }
 
@@ -79,6 +122,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
     }
 
     var liste = ref.watch(stoklarProvider(currentPage));
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: CommonAppbar(
@@ -101,14 +145,14 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
             ),
             _buildListeleButton(),
             liste.when(data: (data) {
-              //currentPage == 0 ? ref.read(stoklarProvider(0)) : SizedBox;
-              print("Current Page değerim== $currentPage");
               emptyList = data.map((e) => e).toList();
               fullList.addAll(emptyList);
+              searchFilter ? fullList.clear() : null;
+              print("full Lİst" + fullList.length.toString());
               return RefreshIndicator(
                   onRefresh: handleRefresh,
                   color: Color(MyColors.bg01),
-                  child: _buildStokKarti());
+                  child: _buildStokKarti(fullList));
             }, error: (err, stack) {
               return Center(
                 child: Text("Hata çıktı ${err.toString()}"),
@@ -126,20 +170,20 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
     );
   }
 
-  SizedBox _buildStokKarti() {
+  SizedBox _buildStokKarti(List<Stoklar> stokList) {
     return SizedBox(
       height: context.dynamicHeight * 0.75,
       child: ListView.builder(
         controller: scrollController,
         itemBuilder: (context, index) {
-          if (index < fullList.length) {
+          if (index < stokList.length) {
             return InkWell(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => StokDetay(
-                      stokModel: fullList[index],
+                      stokModel: stokList[index],
                     ),
                   ),
                 );
@@ -160,12 +204,12 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
                         SizedBox(
                           width: context.dynamicWidth * 0.01,
                         ),
-                        _buildKodVeAd(index),
+                        _buildKodVeAd(index, stokList),
                         SizedBox(
                           width: context.dynamicWidth * 0.10,
                         ),
                         //FİYAT
-                        _buildAdetVeFiyat(index)
+                        _buildAdetVeFiyat(index, stokList)
                       ],
                     ),
                   ),
@@ -190,7 +234,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
     );
   }
 
-  Expanded _buildAdetVeFiyat(int index) {
+  Expanded _buildAdetVeFiyat(int index, List<Stoklar> stokList) {
     return Expanded(
       flex: 2,
       child: Column(
@@ -198,7 +242,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
           Padding(
             padding: EdgeInsets.all(context.dynamicHeight * 0.006),
             child: Text(
-              "Adet: ${fullList[index].stokFiyat.ceil().toString()}",
+              "Adet: ${stokList[index].stokFiyat.ceil().toString()}",
               style: TextStyle(
                 color: Color(MyColors.bg01),
                 fontSize: 10,
@@ -208,7 +252,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
             ),
           ),
           Text(
-            "${fullList[index].stokFiyat.toString()} TL",
+            "${stokList[index].stokFiyat.toString()} TL",
             style: TextStyle(
               color: Color(MyColors.bg01),
               fontSize: 10,
@@ -221,14 +265,14 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
     );
   }
 
-  Expanded _buildKodVeAd(int index) {
+  Expanded _buildKodVeAd(int index, List<Stoklar> stokList) {
     return Expanded(
       flex: 9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            fullList[index].stokIsim,
+            stokList[index].stokIsim,
             style: TextStyle(
               color: Color(MyColors.bg01),
               fontWeight: FontWeight.w600,
@@ -241,7 +285,7 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
             height: context.dynamicHeight * 0.01,
           ),
           Text(
-            fullList[index].stokKodu,
+            stokList[index].stokKodu,
             style: TextStyle(
               color: Color(MyColors.bg01),
               fontSize: 10,

@@ -84,7 +84,7 @@ class _CariKartlarState extends ConsumerState<CariKartlar> {
         backgroundColor: Color(MyColors.bg01),
         child: const Icon(
           Icons.add,
-          size: 15,
+          size: 25,
         ),
       ),
       resizeToAvoidBottomInset: true,
@@ -248,7 +248,8 @@ class _CariKartlarState extends ConsumerState<CariKartlar> {
           Expanded(
             child: TextField(
               onTap: () {},
-              onChanged: (value) => _runFilter(value),
+              //onChanged: (value) => _runFilter(value),
+              onSubmitted: (value) => _runFilter(value),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: Constants.ARA,

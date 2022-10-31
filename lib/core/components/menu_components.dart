@@ -125,6 +125,20 @@ List dataList = [
   {
     "name": Constants.CARI_ISLEMLER,
     "icon": Icons.account_circle,
+    "subMenu": [
+      {
+        "name": "Cari Detay",
+      },
+      {
+        "name": "Cari Tanıtım Kartı",
+      },
+      {
+        "name": "Cari Grup Tanıtım Kartı",
+      },
+      {
+        "name": "Cari Sektör Tanıtım Kartı",
+      },
+    ],
   },
   {
     "name": Constants.STOK_ISLEMLERI,

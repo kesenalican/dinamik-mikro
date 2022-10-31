@@ -83,7 +83,7 @@ Widget _buildList(Menu list) {
                     MaterialPageRoute(
                         builder: (context) => const StokKartlari()));
                 break;
-              case Constants.CARI_ISLEMLER:
+              case Constants.CARI_DETAY:
                 Navigator.push(
                     context,
                     MaterialPageRoute(
