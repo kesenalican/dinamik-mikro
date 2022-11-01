@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 extension ContextExtension on BuildContext {
   double get dynamicHeight => MediaQuery.of(this).size.height;

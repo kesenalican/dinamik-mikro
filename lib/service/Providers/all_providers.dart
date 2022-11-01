@@ -1,4 +1,5 @@
 import 'package:dinamik_otomasyon/Model/depo_model.dart';
+import 'package:dinamik_otomasyon/Model/firma_model.dart';
 import 'package:dinamik_otomasyon/Model/kasa_model.dart';
 import 'package:dinamik_otomasyon/Model/vergi_daire_model.dart';
 import 'package:dinamik_otomasyon/core/base/service/base_provider.dart';
@@ -30,11 +31,21 @@ final kasalarProvider = FutureProvider<List<KasaModel>>((ref) async {
 final vergiDaireleriProvider =
     FutureProvider<List<VergiDaireModel>>((ref) async {
   final dio = ref.watch(httpClientProvider);
-  final result = await dio.get("Kasalar");
+  final result = await dio.get("VergiDaireleri");
   List<Map<String, dynamic>> mapData = List.from(result.data);
   List<VergiDaireModel> vergiDaireList =
       mapData.map((e) => VergiDaireModel.fromMap(e)).toList();
   return vergiDaireList;
+});
+//#endregion
+
+final firmaProvider = FutureProvider<List<FirmaModel>>((ref) async {
+  final dio = ref.watch(httpClientProvider);
+  final result = await dio.get("Firma");
+  List<Map<String, dynamic>> mapData = List.from(result.data);
+  List<FirmaModel> firmaList =
+      mapData.map((e) => FirmaModel.fromMap(e)).toList();
+  return firmaList;
 });
 //#endregion
 

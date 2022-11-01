@@ -1,6 +1,7 @@
 import 'package:dinamik_otomasyon/core/constants/constant.dart';
 import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/view/common/common_appbar.dart';
+import 'package:dinamik_otomasyon/view/common/common_loading.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/model/stoklar_model.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/service/stok_service.dart';
 import 'package:dinamik_otomasyon/view/screens/stokIslemleri/view/open_barcode.dart';
@@ -144,26 +145,23 @@ class _StokKartlariState extends ConsumerState<StokKartlari> {
               ],
             ),
             _buildListeleButton(),
-            liste.when(data: (data) {
-              emptyList = data.map((e) => e).toList();
-              fullList.addAll(emptyList);
-              searchFilter ? fullList.clear() : null;
-              print("full Lİst" + fullList.length.toString());
-              return RefreshIndicator(
-                  onRefresh: handleRefresh,
-                  color: Color(MyColors.bg01),
-                  child: _buildStokKarti(fullList));
-            }, error: (err, stack) {
-              return Center(
-                child: Text("Hata çıktı ${err.toString()}"),
-              );
-            }, loading: () {
-              return Center(
-                child: CircularProgressIndicator(
-                  color: Color(MyColors.bg01),
-                ),
-              );
-            }),
+            liste.when(
+                data: (data) {
+                  emptyList = data.map((e) => e).toList();
+                  fullList.addAll(emptyList);
+                  searchFilter ? fullList.clear() : null;
+                  print("full Lİst" + fullList.length.toString());
+                  return RefreshIndicator(
+                      onRefresh: handleRefresh,
+                      color: Color(MyColors.bg01),
+                      child: _buildStokKarti(fullList));
+                },
+                error: (err, stack) {
+                  return Center(
+                    child: Text("Hata çıktı ${err.toString()}"),
+                  );
+                },
+                loading: () => const CommonLoading()),
           ],
         ),
       ),

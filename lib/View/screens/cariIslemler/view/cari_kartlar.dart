@@ -6,9 +6,7 @@ import 'package:dinamik_otomasyon/view/screens/cariIslemler/service/cari_service
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/yeniCariKart/yeni_cari_kart.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/viewmodel/cari_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import '../../../styles/colors.dart';
 import 'cari_detay.dart';
 
