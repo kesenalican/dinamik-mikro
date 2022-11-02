@@ -31,6 +31,7 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
+  email_validator: ^2.1.17
   fl_chart: ^0.55.2
   flutter:
     sdk: flutter
@@ -39,6 +40,7 @@ dependencies:
   flutter_map: ^0.14.0
   flutter_riverpod: ^2.0.2
   freezed_annotation: ^2.2.0
+  get_it: ^7.2.0
   hooks_riverpod: ^2.0.2
   infinite_scroll: ^1.1.1
   intl: ^0.17.0
@@ -54,8 +56,8 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.2.0
   http: ^0.13.5
-  sql_conn: ^0.0.3
   json_serializable: ^6.5.3
+  sql_conn: ^0.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

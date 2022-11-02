@@ -36,6 +36,7 @@ class Constants {
   static const String CARI_KODU = "Cari Kodu";
   static const String CARI_UNVANI = "Cari Ünvanı";
   static const String VERGI_DAIRE = "Vergi Dairesi";
+  static const String VERGI_DAIRE_KODU = "Vergi Daire Kodu";
   static const String VERGINO = "Vergi/TCK No";
   static const String EFATURA = "E-Fatura";
   static const String TEMSILCI = "Temsilci";
@@ -78,6 +79,7 @@ class Constants {
   static const String MIKTAR = "Miktar: ";
   static const String HIZMET_KARTI = "Hizmet Kartı";
   static const String URUN_ARA = "Ürün Ara";
+  static const String YENI_CARI_OLUSTUR = "Yeni Cari Oluştur";
 
   //STOK DETAY => RAPORLAR
   static const String STOK_BAKIYE_LISTESI = "Stok Bakiye Listesi";
@@ -98,8 +100,23 @@ class Constants {
   static const String HATA_ICERIK = "Sunucuya bağlanırken bir hata oluştu";
   static const String SATIS_FATURASI_BULUNAMADI =
       "Son 6 aya ait satış faturası bulunamadı...";
-
   static const int PAGE_COUNT = 20;
+  static const String HAREKET_TIPI = "Hareket Tipi";
+  static const String BAGLANTI_TIPI = "Bağlantı Tipi";
+  static const String STOK_ALIM_CINSI = "Stok Alım Cinsi";
+  static const String STOK_SATIS_CINSI = "Stok Satış Cinsi";
+  static const String YETKILI_ADI = "Yetkili Adı";
+  static const String YETKILI_SOYADI = "Yetkili Soyadı";
+  static const String ADRES1 = "Adres1";
+  static const String ADRES2 = "Adres2";
+  static const String IL = "İl";
+  static const String ILCE = "İlçe";
+  static const String ULKE = "Ülke";
+  static const String ULKE_KODU = "Ülke Kodu";
+  static const String TELEFON = "Telefon";
+  static const String FAX = "Fax";
+
+  static const String VERGI_DAIRESI_SECINIZ = "Vergi Dairesi Seçiniz";
 }
 
 class ConstantProvider {

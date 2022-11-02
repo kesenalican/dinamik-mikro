@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// ignore: must_be_immutable
 class Login extends HookConsumerWidget {
   bool? rememberMe = false;
 
@@ -54,7 +55,7 @@ class Login extends HookConsumerWidget {
                       context: context, hataBaslik: "Hata", hataIcerik: "Hata"),
                   data: (data) {
                     List<FirmaModel> firmaList = data.map((e) => e).toList();
-                    return _buildInputField(
+                    return _buildFirmaField(
                       firmalist: firmaList,
                       firmaController: firmaController,
                       context: context,
@@ -75,50 +76,62 @@ class Login extends HookConsumerWidget {
                       context: context, hataBaslik: "Hata", hataIcerik: "Hata"),
                   data: (data) {
                     List<UserModel> userList = data.map((e) => e).toList();
-                    return _buildInputField(
+                    return _buildUserField(
                       context: context,
+                      userController: kullaniciController,
+                      userList: userList,
                       dynamicHeight: dynamicHeight,
                       dynamicWidth: dynamicWidth,
-                      hint: Constants.SIRKET_ADI,
-                      prefixIcon: Icons.account_balance,
+                      hint: Constants.KULLANICI_ADI,
+                      prefixIcon: Icons.person,
                       suffixIcon: Icons.replay_rounded,
                     );
                   },
                 ),
               ),
-
-              // Expanded(
-              //   flex: 1,
-              //   child: _buildInputField(
-              //     firmaList,
-              //     dynamicHeight,
-              //     dynamicWidth,
-              //     context,
-              //     Constants.KULLANICI_ADI,
-              //     Icons.supervised_user_circle,
-              //     kullaniciController,
-              //     Icons.account_balance,
-              //   ),
-              // ),
-              // Expanded(
-              //   flex: 1,
-              //   child: _buildInputField(
-              //       dynamicHeight,
-              //       dynamicWidth,
-              //       context,
-              //       Constants.SIFRE,
-              //       Icons.password,
-              //       passwordController,
-              //       Icons.account_balance,
-              //       () {}),
-              // ),
+              Expanded(
+                flex: 1,
+                child: _buildPasswordField(
+                  context: context,
+                  dynamicHeight: dynamicHeight,
+                  dynamicWidth: dynamicWidth,
+                  hint: "Şifre",
+                  passwordController: passwordController,
+                  prefixIcon: Icons.password,
+                ),
+              ),
               Expanded(
                 child: _buildRememberMe(),
               ),
               Expanded(
                 flex: 1,
-                child: _buildLoginButton(Constants.GIRIS_YAP, firmaController,
-                    context, dynamicHeight, dynamicWidth),
+                child: _buildLoginButton(
+                  Constants.GIRIS_YAP, firmaController,
+                  context, dynamicHeight, dynamicWidth,
+                  // () {
+                  //   if (kullaniciController.text != "" &&
+                  //       passwordController.text != "") {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => HomePage(
+                  //           sirketAdi: firmaController.text,
+                  //         ),
+                  //       ),
+                  //     );
+                  //   } else {
+                  //     Future.delayed(
+                  //       const Duration(seconds: 1),
+                  //       () {
+                  //         showAlertDialog(
+                  //             context: context,
+                  //             hataBaslik: "Sunucu Hatası",
+                  //             hataIcerik: "Girdiğiniz bilgiler yanlış.");
+                  //       },
+                  //     );
+                  //   }
+                  // },
+                ),
               ),
               const Spacer(flex: 2),
             ],
@@ -128,7 +141,7 @@ class Login extends HookConsumerWidget {
     );
   }
 
-  _buildInputField({
+  _buildFirmaField({
     List<FirmaModel>? firmalist,
     TextEditingController? firmaController,
     double? dynamicHeight,
@@ -140,13 +153,12 @@ class Login extends HookConsumerWidget {
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: dynamicWidth! * 0.02, vertical: dynamicHeight! * 0.002),
+          horizontal: dynamicWidth! * 0.02, vertical: dynamicHeight! * 0.001),
       child: Form(
         child: Material(
             elevation: 8,
             shadowColor: Colors.black87,
             color: Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
             child: TextFormField(
               controller: firmaController,
               textAlignVertical: TextAlignVertical.bottom,
@@ -155,9 +167,15 @@ class Login extends HookConsumerWidget {
                 color: Color(
                   MyColors.bg01,
                 ),
-                fontSize: 15,
+                fontSize: 12,
               ),
               decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  fontSize: 15,
+                  color: Color(
+                    MyColors.bg01,
+                  ),
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
@@ -189,6 +207,130 @@ class Login extends HookConsumerWidget {
     );
   }
 
+  _buildUserField({
+    List<UserModel>? userList,
+    TextEditingController? userController,
+    double? dynamicHeight,
+    double? dynamicWidth,
+    context,
+    String? hint,
+    IconData? prefixIcon,
+    IconData? suffixIcon,
+  }) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: dynamicWidth! * 0.02, vertical: dynamicHeight! * 0.002),
+      child: Form(
+        child: Material(
+            elevation: 8,
+            shadowColor: Colors.black87,
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+            child: TextFormField(
+              controller: userController,
+              textAlignVertical: TextAlignVertical.bottom,
+              cursorColor: Color(MyColors.bg01),
+              style: TextStyle(
+                color: Color(
+                  MyColors.bg01,
+                ),
+                fontSize: 15,
+              ),
+              decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  fontSize: 15,
+                  color: Color(
+                    MyColors.bg01,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: Colors.white,
+                hintText: hint,
+                focusColor: Color(MyColors.primary),
+                prefixIcon: Icon(
+                  prefixIcon,
+                  color: Color(
+                    MyColors.bg01,
+                  ),
+                ),
+                suffix: InkWell(
+                    onTap: () {
+                      showUsers(context, userList!, userController!,
+                          dynamicHeight, dynamicWidth);
+                    },
+                    child: Icon(
+                      suffixIcon,
+                      color: Color(
+                        MyColors.bg01,
+                      ),
+                    )),
+              ),
+            )),
+      ),
+    );
+  }
+
+  _buildPasswordField({
+    TextEditingController? passwordController,
+    double? dynamicHeight,
+    double? dynamicWidth,
+    context,
+    String? hint,
+    IconData? prefixIcon,
+  }) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: dynamicWidth! * 0.02, vertical: dynamicHeight! * 0.002),
+      child: Form(
+          child: Material(
+        elevation: 8,
+        shadowColor: Colors.black87,
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        child: TextFormField(
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
+            controller: passwordController,
+            textAlignVertical: TextAlignVertical.bottom,
+            cursorColor: Color(MyColors.bg01),
+            keyboardType: TextInputType.visiblePassword,
+            style: TextStyle(
+              color: Color(
+                MyColors.bg01,
+              ),
+              fontSize: 15,
+            ),
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                fontSize: 15,
+                color: Color(
+                  MyColors.bg01,
+                ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              fillColor: Colors.white,
+              hintText: hint,
+              focusColor: Color(MyColors.primary),
+              prefixIcon: Icon(
+                prefixIcon,
+                color: Color(
+                  MyColors.bg01,
+                ),
+              ),
+            )),
+      )),
+    );
+  }
+
   showUsers(context, List<UserModel> list, TextEditingController userController,
       double dynamicHeight, double dynamicWidth) {
     return showDialog(
@@ -196,7 +338,7 @@ class Login extends HookConsumerWidget {
       builder: (context) {
         return SimpleDialog(
           title: Text(
-            "Firma Seçiniz",
+            "Kullanıcı Seçiniz",
             style: purpleBoldTxtStyle,
           ),
           children: [
@@ -306,13 +448,10 @@ class Login extends HookConsumerWidget {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomePage(
-              sirketAdi: firmaController.text,
-            ),
-          ),
-        );
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomePage(sirketAdi: firmaController.text)));
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(

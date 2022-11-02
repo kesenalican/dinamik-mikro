@@ -1,4 +1,5 @@
 import 'package:dinamik_otomasyon/Model/vergi_daire_model.dart';
+import 'package:dinamik_otomasyon/core/constants/constant.dart';
 import 'package:dinamik_otomasyon/core/extensions/extensions.dart';
 import 'package:dinamik_otomasyon/service/Providers/all_providers.dart';
 import 'package:dinamik_otomasyon/view/common/common_appbar.dart';
@@ -6,12 +7,16 @@ import 'package:dinamik_otomasyon/view/common/common_error_dialog.dart';
 import 'package:dinamik_otomasyon/view/common/common_input_border.dart';
 import 'package:dinamik_otomasyon/view/common/common_loading.dart';
 import 'package:dinamik_otomasyon/view/common/search_input.dart';
+import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/common/common_dropdown.dart';
+import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/common/common_types.dart';
+import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/common/list_of_types.dart';
 import 'package:dinamik_otomasyon/view/screens/cariIslemler/view/yeniCariKart/common_textfield.dart';
 import 'package:dinamik_otomasyon/view/styles/colors.dart';
 import 'package:dinamik_otomasyon/view/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:email_validator/email_validator.dart';
 
 class YeniCariKart extends HookConsumerWidget {
   const YeniCariKart({super.key});
@@ -38,7 +43,7 @@ class YeniCariKart extends HookConsumerWidget {
 
     var list = ref.watch(vergiDaireleriProvider);
     return Scaffold(
-      appBar: CommonAppbar(whichPage: "Yeni Cari Oluştur"),
+      appBar: CommonAppbar(whichPage: Constants.YENI_CARI_OLUSTUR),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Color(MyColors.bg01),
@@ -47,115 +52,172 @@ class YeniCariKart extends HookConsumerWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CommonTextField(
-              controller: cariKoduController,
-              field: "CariKodu",
-              icon: Icons.code,
-              textInputType: TextInputType.name,
-            ),
-            CommonTextField(
-              controller: cariUnvanController,
-              field: "Cari Ünvanı",
-              icon: Icons.person,
-              textInputType: TextInputType.name,
-            ),
-            list.when(
-                error: (err, stack) => showAlertDialog(
-                    context: context, hataBaslik: "hata", hataIcerik: "hata"),
-                loading: () => const CommonLoading(),
-                data: (data) {
-                  List<VergiDaireModel> vergiDaireleri =
-                      data.map((e) => e).toList();
-                  return _buildVergiDairesiTextField(vergiDaireController,
-                      context, vergiDaireleri, vergiDaireKoduController);
-                }),
-            CommonTextField(
-              controller: vergiDaireKoduController,
-              field: "Vergi Daire Kodu",
-              icon: Icons.account_balance,
-              textInputType: TextInputType.number,
-            ),
-            CommonTextField(
-              controller: verginoController,
-              field: "Vergi No",
-              icon: Icons.account_balance,
-              textInputType: TextInputType.number,
-            ),
-            CommonTextField(
-              controller: yetkiliAdiController,
-              field: "Yetkili Adı",
-              icon: Icons.person,
-              textInputType: TextInputType.name,
-            ),
-            CommonTextField(
-              controller: yetkiliSoyAdiController,
-              field: "Yetkili Soyadı",
-              icon: Icons.person,
-              textInputType: TextInputType.name,
-            ),
-            CommonTextField(
-              controller: adres1Controller,
-              field: "Adres 1",
-              icon: Icons.location_city,
-              textInputType: TextInputType.streetAddress,
-            ),
-            CommonTextField(
-              controller: adres2Controller,
-              field: "Adres 2",
-              icon: Icons.location_city,
-              textInputType: TextInputType.streetAddress,
-            ),
-            CommonTextField(
-              controller: ilController,
-              field: "İl",
-              icon: Icons.map,
-              textInputType: TextInputType.name,
-            ),
-            CommonTextField(
-              controller: ilceController,
-              field: "İlçe",
-              icon: Icons.maps_home_work,
-              textInputType: TextInputType.name,
-            ),
-            CommonTextField(
-              controller: ulkeController,
-              field: "Ülke",
-              icon: Icons.maps_home_work_sharp,
-              textInputType: TextInputType.name,
-            ),
-            CommonTextField(
-              controller: ulkeKoduController,
-              field: "Ülke Kodu",
-              icon: Icons.maps_home_work_sharp,
-              textInputType: TextInputType.number,
-            ),
-            CommonTextField(
-              controller: telefon1Controller,
-              field: "Telefon 1",
-              icon: Icons.phone,
-              textInputType: TextInputType.phone,
-            ),
-            CommonTextField(
-              controller: telefon2Controller,
-              field: "Telefon 2",
-              icon: Icons.phone,
-              textInputType: TextInputType.phone,
-            ),
-            CommonTextField(
-              controller: faxController,
-              field: "Fax",
-              icon: Icons.fax,
-              textInputType: TextInputType.name,
-            ),
-            CommonTextField(
-              controller: mailController,
-              field: "E-mail",
-              icon: Icons.mail,
-              textInputType: TextInputType.emailAddress,
-            ),
-          ],
+        child: Form(
+          child: Column(
+            children: [
+              CommonTextField(
+                controller: cariKoduController,
+                field: Constants.CARI_KODU,
+                icon: Icons.code,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: cariUnvanController,
+                field: Constants.CARI_UNVANI,
+                icon: Icons.person,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              list.when(
+                  error: (err, stack) => showAlertDialog(
+                      context: context, hataBaslik: "hata", hataIcerik: "hata"),
+                  loading: () => const CommonLoading(),
+                  data: (data) {
+                    List<VergiDaireModel> vergiDaireleri =
+                        data.map((e) => e).toList();
+                    return _buildVergiDairesiTextField(vergiDaireController,
+                        context, vergiDaireleri, vergiDaireKoduController);
+                  }),
+              CommonTextField(
+                controller: vergiDaireKoduController,
+                field: Constants.VERGI_DAIRE,
+                icon: Icons.account_balance,
+                textInputType: TextInputType.number,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: verginoController,
+                field: Constants.VERGINO,
+                icon: Icons.account_balance,
+                textInputType: TextInputType.number,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTypes(
+                hareketTipi: Constants.HAREKET_TIPI,
+                listOfTypes: ListOfTypes.hareketTipi,
+              ),
+              CommonTypes(
+                hareketTipi: Constants.BAGLANTI_TIPI,
+                listOfTypes: ListOfTypes.baglantiTipi,
+              ),
+              CommonTypes(
+                hareketTipi: Constants.STOK_ALIM_CINSI,
+                listOfTypes: ListOfTypes.stokAlimCinsi,
+              ),
+              CommonTypes(
+                hareketTipi: Constants.STOK_SATIS_CINSI,
+                listOfTypes: ListOfTypes.stokSatimCinsi,
+              ),
+              CommonTextField(
+                controller: yetkiliAdiController,
+                field: Constants.YETKILI_ADI,
+                icon: Icons.person,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: yetkiliSoyAdiController,
+                field: Constants.YETKILI_SOYADI,
+                icon: Icons.person,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: adres1Controller,
+                field: Constants.ADRES1,
+                icon: Icons.location_city,
+                textInputType: TextInputType.streetAddress,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: adres2Controller,
+                field: Constants.ADRES2,
+                icon: Icons.location_city,
+                textInputType: TextInputType.streetAddress,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: ilController,
+                field: Constants.IL,
+                icon: Icons.map,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: ilceController,
+                field: Constants.ILCE,
+                icon: Icons.maps_home_work,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: ulkeController,
+                field: Constants.ULKE,
+                icon: Icons.maps_home_work_sharp,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: ulkeKoduController,
+                field: Constants.ULKE_KODU,
+                icon: Icons.maps_home_work_sharp,
+                textInputType: TextInputType.number,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: telefon1Controller,
+                field: Constants.TELEFON,
+                icon: Icons.phone,
+                textInputType: TextInputType.phone,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: faxController,
+                field: Constants.FAX,
+                icon: Icons.fax,
+                textInputType: TextInputType.name,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+              CommonTextField(
+                controller: mailController,
+                field: Constants.EMAIL,
+                icon: Icons.mail,
+                textInputType: TextInputType.emailAddress,
+                validator: (value) {
+                  EmailValidator.validate(value);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -178,7 +240,7 @@ class YeniCariKart extends HookConsumerWidget {
           MyColors.bg01,
         )),
         decoration: InputDecoration(
-          labelText: "Vergi Dairesi",
+          labelText: "Vergi Dairesi*",
           labelStyle: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w400,
